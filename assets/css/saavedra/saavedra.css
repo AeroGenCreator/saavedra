@@ -38,3 +38,15 @@
     font-size: 70px;
     padding: 1cm 0 0;
 }
+
+.glow-text {
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.glow-text:hover {
+  color: white;
+  text-shadow: 0 0 8px rgba(211, 211, 211, 0.8),
+              0 0 15px rgba(211, 211, 211, 0.5);
+}
