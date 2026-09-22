@@ -39,6 +39,33 @@
     padding: 1cm 0 0;
 }
 
+.article {
+    background-color: hsl(0, 0%, 21%);
+    margin: 0.5rem;
+    color: white;
+    border-radius: 5px;
+}
+
+.article-subtitle {
+    text-align: start;
+    font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+    color: white;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 25px;
+    padding: 1rem;
+}
+
+.article-text {
+    text-align: start;
+    font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+    color: white;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 10px;
+    padding: 0 1rem 1rem;
+}
+
 .glow-text {
   color: white;
   transition: all 0.3s ease;
