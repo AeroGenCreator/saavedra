@@ -74,6 +74,17 @@ func (e EndpointHandler) CallUsers(w http.ResponseWriter, r *http.Request) {
 func (e EndpointHandler) CallUsersNew(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
+		party := r.Context().Value(utils.UserParty).(string)
+		valid, err := utils.AddPermissions(0, party)
+		if err != nil {
+			log.Printf("Error '/users' (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		if !valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 		tpl, err := template.ParseFiles("services/Saavedra/Users/views/new.html")
 		if err != nil {
 			log.Printf("Error '/users/new' (%v)", err.Error())
@@ -108,6 +119,17 @@ func (e EndpointHandler) CallUsersNew(w http.ResponseWriter, r *http.Request) {
 func (e EndpointHandler) CallUsersRecord(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
+		party := r.Context().Value(utils.UserParty).(string)
+		valid, err := utils.AddPermissions(0, party)
+		if err != nil {
+			log.Printf("Error '/users' (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		if !valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 		id := r.URL.Query().Get("id")
 		intId, err := strconv.Atoi(id)
 		if err != nil {
