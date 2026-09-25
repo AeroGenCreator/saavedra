@@ -45,7 +45,7 @@ El backend de saavedra se inspira en `repositoy pattern`. Esto es fundamental pa
 
 ### 🎨 Frontend
 
-El frontend hace peticiones gracias a `alpine.js`. Las peticiones viajan se manera segura gracias a funciones `javascript` reutilizables.
+El frontend hace peticiones gracias a `alpine.js`. Las peticiones viajan de manera segura gracias a funciones `javascript` reutilizables.
 
 ### 📖 Principios
 
