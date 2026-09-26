@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="/assets/css/bulma/css/bulma.min.css">
     <!-- Hoja de estilos de Saavedra -->
     <link rel="stylesheet" href="/assets/css/saavedra/saavedra.css">
-    <!-- Importar Font Awsome Icons -->
+    <!-- Resaltado de color CODIGO -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css">
+    <!-- Importar Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/75d1a8fea1.js" crossorigin="anonymous"></script>
     <!-- Importar Codigo JavaScript Reutilizable -->
     <script defer src="/assets/src/utils/utils.js"></script>
@@ -82,10 +84,8 @@
                             </span>
                             <hr>
                             <div class="content">
-                                <pre>
-                                    <code class="has-text-primary">
-                                        // Código 'go'
-
+                                <div>
+                                    <pre><code class="language-go">
                                         func (e Endpoint) CallEmployeesList(w http.ResponseWriter, r *http.Request) {
                                             page := r.URL.Query("page")
                                             records := e.service.EmployeesList(page)
@@ -96,12 +96,12 @@
                                             Id int `json:"json"`
                                             ...
                                         }
-                                    </code>
-                                </pre>
+                                    </code></pre>
+                                </div>
                                 <blockquote>
                                     <p>
-                                        Esto es todo por el momento. La recomendación es continuar con el
-                                        <a>Tutorial Básico</a> (Crea un CRUD). De esta manera entenderas mucho
+                                        Esto es todo por el momento. Se recomienda continuar con el
+                                        <a href="/">Tutorial Básico</a> (Crea un CRUD). De esta manera entenderas mucho
                                         mejor la arquitectura, la toma de desición, y los fragmentos
                                         de saavedra.
                                     </p>
@@ -113,4 +113,11 @@
             </div>
         </div>
     </section>
+    <!-- 3. Librería Highlight.js y activación -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+      <!-- Opcional: Cargar explícitamente el paquete de lenguaje Go si usas una versión reducida -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+      <script>
+          hljs.highlightAll();
+      </script>
 </body>
