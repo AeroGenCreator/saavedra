@@ -133,9 +133,14 @@ async function ReadRecord(id, redirect) {
 
 async function CreateRecord(path, redirect, options = {}) {
   try {
+    var object = {"message": false}
     const res = await SecureFetching(path, options)
     if (!res.ok) {
-      throw new Error(res.status)
+      if (res.status === 401) {
+        return object.message = true
+      } else {
+        throw new Error(res.status)
+      }
     }
     window.location.href = redirect
   } catch (error) {
@@ -145,8 +150,15 @@ async function CreateRecord(path, redirect, options = {}) {
 
 async function UpdateRecord(path, redirect, options = {}) {
   try {
+    var object = {"message": false}
     const res = await SecureFetching(path, options)
-    if (!res.ok) throw new Error(await res.text())
+    if (!res.ok) {
+      if (res.status === 401) {
+        return object.message = true
+      } else {
+        throw new Error(await res.text())
+      }
+    }
     window.location.href = redirect
   } catch (error) {
     throw error

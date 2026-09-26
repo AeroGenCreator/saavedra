@@ -15,4 +15,5 @@ func Assambler(mux *http.ServeMux, db *sql.DB) {
 	handler := api.New(servicing)
 
 	mux.Handle("/", utils.LowLevelMiddleware(http.HandlerFunc(handler.CallRoot)))
+	mux.HandleFunc("/philosophy", handler.CallPhilosophy)
 }
