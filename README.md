@@ -20,7 +20,9 @@
 
 # 🖌️ Saavedra
 
-Saavedra es una caja de herramientas y un contrato de flujos pensado para el desarrollo de servicios empresariales. Se inspira en los módulos de los ERPs modernos. 
+Saavedra es una caja de herramientas unida a través de un contrato de flujos.
+
+- Saavedra fue pensado para el desarrollo de servicios empresariales así mismo se tomó inspiracion de los módulos de los ERPs modernos.
 
 Sin embargo cada servicio se construye desde cero lo cual facilita la personalización por cliente.
 
@@ -33,6 +35,7 @@ Una vez tengas una copia de saavedra cualquier código extra podra ser agregado 
 Sin embargo es recomendable seguir los siguientes pasos.
 
 - [Tutorial Básico (construye un CRUD)]()
+- [Filosofía]()
 - [Documentación (fragmentos y piezas)]()
 
 Es importante resaltar que el tutorial es corto. Pues saavedra no es un `motor` de desarrollo en su lugar es una serie de contratos de flujo y fragmentos de código reutilizables faciles de implementar.
