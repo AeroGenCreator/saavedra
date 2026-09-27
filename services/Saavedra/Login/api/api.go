@@ -90,3 +90,23 @@ func (e EndpointHandler) CallPhilosophy(w http.ResponseWriter, r *http.Request) 
 		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
 	}
 }
+
+// ROUTE: "/docs"
+func (e EndpointHandler) CallDocs(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		tpl, err := template.ParseFiles("services/Saavedra/Login/views/docs.html")
+		if err != nil {
+			log.Printf("Error parsing (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		if err := tpl.Execute(w, map[string]string{"Title": "Documentación"}); err != nil {
+			log.Printf("Error rendering (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	default:
+		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+	}
+}
