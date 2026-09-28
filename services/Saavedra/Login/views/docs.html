@@ -32,83 +32,369 @@
 <main>
 <section class="section">
     <div class="container">
-        <div class="box">
-            <!-- Titulo -->
-            <div class="title is-2">
-                <span class="icon-text">
-                    <span class="icon"><i class="fa-solid fa-file"></i></span>
-                    <span>Documentación</span>
-                </span>
-            </div>
-            <div class="block">
-                <span class="icon-text is-size-6">
-                    <p>
-                        A diferencia de los frameworks completos,
-                        Saavedra cuenta con poca documentación,
-                        ya que basta con conocer algunas funciones reutilizables dentro del código base.
-                        Estas se dividen en dos partes principales: Backend ( Go ) y Frontend ( JS | HTML ).
-
-                        A continuación, se dará una breve explicación de cada componente,
-                        acompañada de un ejemplo de cómo implementarlo en el código.
-                    </p>
-                </span>
-            </div>
-            <hr>
-            <div class="subtitle is-3">
-                <span class="icon-text">
-                    <span class="icon"><i class="fa-brands fa-google"></i></span>
-                    <span>( Go ) Backend</span>
-                </span>
-            </div>
-            <div class="block">
-                <p class="subtitle is-5">Protejer Endpoint ( AuthMiddleware )</p>
-                <p class="is-size-6">
-                    Cuando se programan endpoints ( aplicación ) siempre se
-                    debe protejer la ruta envolviendo el endpoint con un
-                    <strong>AuthMiddleware</strong> además de protección
-                    podra a acceder a data del <em>usuario</em> que realiza la petición.
-                </p>
-                <pre><code>
-                    mux.Handle("/users", utils.AuthMiddleware(http.HandlerFunc(handler.CallUsers)))
-                </code></pre>
-            </div>
-            <div class="block">
-                <p class="subtitle is-5">Data Del Usuario en Petición ( <em>type</em> ContextKey )</p>
-                <p class="is-size-6">
-                    Es posible acceder a la data de usuario cuando se realiza una peticion a
-                    algun endpoint ( protejido ). <em>A continuacion se muestra la posible data:</em>
-                </p>
-                <pre><code>
-                    // Id ( Base de datos ) del usuario
-
-                    id := r.Context().Value(utils.UserId).(string)
-
-                    // Name ( Base de datos ) del usuario
-                    name := r.Context().Value(utils.UserName).(string)
-
-                    // Grupo de permisos del usuario
-                    party := r.Context().Value(utils.UserParty).(string)
-
-                    // Token JWT de autenticidad
-                    jwt := r.Context().Value(utils.UserToken).(string)
-                </code></pre>
-            </div>
-            <hr>
-            <div class="subtitle is-3">
-                <span class="icon-text">
-                    <span class="icon"><i class="fa-brands fa-html5"></i></span>
-                    <span>( HTML ) Frontend</span>
-                </span>
-            </div>
-            <hr>
-            <div class="subtitle is-3">
-                <span class="icon-text">
-                    <span class="icon"><i class="fa-brands fa-square-js"></i></i></span>
-                    <span>( JS ) Frontend</span>
-                </span>
+    <div class="columns">
+        <div class="column is-one-quarter">
+            <div class="box">
+                <div class="block">
+                    <div class="title is-2">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-regular fa-folder"></i></span>
+                            <span>Indice</span>
+                        </span>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>Backend ( Go )</li>
+                            <ul>
+                                <li>Protejer Endpoint ( AuthMiddleware )</li>
+                                <li>Data Del Usuario en Petición ( type ContextKey )</li>
+                                <li>Obtener Data de Usuario Sin Protejer Endpoint ( LowLevelMiddleware )</li>
+                                <li>Permisos de Usuario ( AddPermissions )</li>
+                                <li>Contar total de pagínas ( CalculateTotalPages )</li>
+                                <li>Variables de entorno ( .env )</li>
+                            </ul>
+                            <li>Frontend ( HTML )</li>
+                            <ul>
+                                <li>Cabecera HTML ( aplicación )</li>
+                                <li>Nuevo menu ( menuitem )</li>
+                                <li>Barra de navegación ( Navbar )</li>
+                            </ul>
+                            <a href="#frontend-js"><li>Frontend ( JavaScript )</li></a>
+                            <ul>
+                                <li>Alpine Componente</li>
+                                <li>Navegación ( GoHome, GoBack, logOut, OnlyRedirect )</li>
+                                <li>CRUD ( ReadRecord, CreateRecord, UpdateRecord, DeleteRecord, FetchDataFromResponse )</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="column is-three-quarters">
+            <div class="box">
+                <!-- Titulo -->
+                <div class="title is-2">
+                    <span class="icon-text">
+                        <span class="icon"><i class="fa-solid fa-file"></i></span>
+                        <span>Documentación</span>
+                    </span>
+                </div>
+                <div class="block">
+                    <span class="icon-text is-size-6">
+                        <p>
+                            A diferencia de los frameworks completos,
+                            Saavedra cuenta con poca documentación,
+                            ya que basta con conocer algunas funciones reutilizables dentro del código base.
+                            Estas se dividen en dos partes principales: Backend ( Go ) y Frontend ( JS | HTML ).
+
+                            A continuación, se dará una breve explicación de cada componente,
+                            acompañada de un ejemplo de cómo implementarlo en el código.
+                        </p>
+                    </span>
+                </div>
+                <hr>
+                <div class="subtitle is-3">
+                    <span class="icon-text">
+                        <span class="icon"><i class="fa-brands fa-google"></i></span>
+                        <span id="backend">( Go ) Backend</span>
+                    </span>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Protejer Endpoint ( AuthMiddleware )</p>
+                    <p class="is-size-6">
+                        Cuando se programan endpoints ( aplicación ) siempre se
+                        debe protejer la ruta envolviendo el endpoint con un
+                        <strong>AuthMiddleware</strong> además de protección
+                        podra a acceder a data del <em>usuario</em> que realiza la petición.
+                    </p>
+                    <pre><code>
+                        mux.Handle("/users", utils.AuthMiddleware(http.HandlerFunc(handler.CallUsers)))
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Data Del Usuario en Petición ( <em>type</em> ContextKey )</p>
+                    <p class="is-size-6">
+                        Es posible acceder a la data de usuario cuando se realiza una peticion a
+                        algun endpoint ( protejido ). <em>A continuacion se muestra la posible data:</em>
+                    </p>
+                    <pre><code>
+                        // Id ( Base de datos ) del usuario
+
+                        id := r.Context().Value(utils.UserId).(string)
+
+                        // Name ( Base de datos ) del usuario
+                        name := r.Context().Value(utils.UserName).(string)
+
+                        // Grupo de permisos del usuario
+                        party := r.Context().Value(utils.UserParty).(string)
+
+                        // Token JWT de autenticidad
+                        jwt := r.Context().Value(utils.UserToken).(string)
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Obtener Data de Usuario Sin Protejer Endpoint ( LowLevelMiddleware )</p>
+                    <p class="is-size-6">
+                        Si se desea obtener data de usuario desde el <em>Context( )</em> de la petición
+                        sin protejer un endpoint, es posible usar <strong>LowLevelMiddleware</strong>.
+                    </p>
+                    <pre><code>
+                        mux.Handle("/session", utils.LowLevelMiddleware(http.HandlerFunc(handler.CallSession)))
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Permisos de Usuario ( AddPermissions )</p>
+                    <p class="is-size-6">
+                        Ademas de la protección de endpoints, existen los permisos.
+                        Puedes agregar permisos según el grupo de ususario ( party )
+                        para, leer, crear, editar o eliminar registros de la siguiente manera.
+                        Toma en cuenta que los componentes JS se encargan de manejar
+                        no autorizados.
+                        Argumentos:
+                    </p>
+                    <div class="content">
+                        <ul>
+                            <li><strong>Int</strong> <em>Nivel de permiso: si 0 se asume 4</em></li>
+                            <li><strong>String</strong> <em>Grupo del usuario obtenido desde .Contex()</em></li>
+                        </ul>
+                    </div>
+                    <pre><code>
+                        party := r.Context().Value(utils.UserParty).(string)
+                  		valid, err := utils.AddPermissions(0, party)
+                  		if err != nil {
+                 			log.Printf("Error '/users' (%v)", err.Error())
+                 			http.Error(w, err.Error(), http.StatusInternalServerError)
+                 			return
+                  		}
+                  		if !valid {
+                 			w.WriteHeader(http.StatusUnauthorized)
+                 			return
+                  		}
+                    </code></pre>
+                    <p>Niveles de permisos</p>
+                    <pre><code>
+                        "parties": ["admin", "manager", "creator", "visitor"],
+                        "levels": [
+                        {"level": 4, "permissions": ["admin"]},
+                        {"level": 3, "permissions": ["admin", "manager"]},
+                        {"level": 2, "permissions": ["admin", "manager", "creator"]},
+                        {"level": 1, "permissions": ["admin", "manager", "creator", "visitor"]}
+                        ]
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Contar total de pagínas ( CalculateTotalPages )</p>
+                    <p class="is-size-6">
+                        En algunos casos es necesario contar las pagínas segun la cantidad de
+                        filas determinadas por un <em>slice</em> enviado al frontend.
+                        Esto permite determinar si una pagina de registros tiene una pagina siguiente.
+                    </p>
+                    <pre><code>
+                        // La función tiene 2 argumentos:
+                        // 1. Filas totales
+                        // 2. Total de filas enviadas al frontend
+                        totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Variables de entorno ( .env )</p>
+                    <p class="is-size-6">
+                        Además de las filas que se envian al frontend, existen otras variables que
+                        determinan procesos del backend.
+                    </p>
+                    <pre><code>
+                        // Protección ( Token )
+                        SESSION_TOKEN=
+                        // Nombre de la base de datos
+                        DATABASE_NAME=
+                        // Nombre del administrador
+                        ADMIN_NAME=
+                        // Correo del administrador
+                        ADMIN_EMAIL=
+                        // Contraseña del administrador
+                        ADMIN_PASSWORD=
+                        // Registros enviados al frontend por petición
+                        RECORDS_PER_SLICE=
+                        // Obtencion de peticiones seguras unicamente
+                        IS_PRODUCTION=
+                        HOST=
+                        PORT=
+                        // Tiempos de expiración determinadas en frontend y backend
+                        BACKEND_TOKEN_EXPIRATION_TIME=
+                        FRONTEND_TOKEN_EXPIRATION_TIME=
+                    </code></pre>
+                </div>
+                <hr>
+                <div class="subtitle is-3">
+                    <span class="icon-text">
+                        <span class="icon"><i class="fa-brands fa-html5"></i></span>
+                        <span>( HTML ) Frontend</span>
+                    </span>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Cabecera HTML ( aplicación )</p>
+                    <p class="is-size-6">
+                        Importación de dependencias Frontend
+                    </p>
+                    <pre><code>
+                        &lt!DOCTYPE html&gt
+                        &lthtml lang="es"&gt
+                        &lthead&gt
+                            &ltmeta charset="UTF-8"&gt
+                            &ltmeta name="viewport" content="width=device-width, initial-scale=1.0"&gt
+                            &ltlink rel="stylesheet" href="/assets/css/bulma/css/bulma.min.css"&gt
+                            &ltlink rel="stylesheet" href="/assets/css/saavedra/saavedra.css"&gt
+                            &ltscript src="https://kit.fontawesome.com/75d1a8fea1.js" crossorigin="anonymous"&gt&ltscript&gt
+                            &ltscript defer src="/assets/src/utils/utils.js"&gt&ltscript&gt
+                            &ltscript defer src=""&gt&ltscript&gt
+                            &ltscript defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.17.3/dist/cdn.min.js"&gt&ltscript&gt
+                            &lttitle&gt{{ .Titulo }}&lttitle&gt
+                        &lthead&gt
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Nuevo menu ( menuitem )</p>
+                    <p class="is-size-6">
+                        Cuando se crea un servicio, es necesario crear el <strong>item de menu</strong>.
+                    </p>
+                    <pre><code>
+                        &ltdiv class="column is-3"&gt
+                            &lta @click="Direecionar Con Alpine"&gt
+                                &ltdiv class="notification is-primary clickable menuitem focus"&gt
+                                    &ltspan class="icon-text"&gt
+                                        &ltspan class="icon"&gt&lti class="fa-solid fa-users"&gt&lti&gt&ltspan&gt
+                                        &ltspan&gt&lth2 class="subtitle"&gtUsuarios&lth2&gt&ltspan&gt
+                                    &ltspan&gt
+                                    &ltp class="is-size-7"&gtAgregar, editar y eliminar usuarios.&ltp&gt
+                                &ltdiv&gt
+                            &lta&gt
+                        &ltdiv&gt
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Barra de navegación ( Navbar )</p>
+                    <p class="is-size-6">
+                        Saavedra ya cuenta con una barra de navegación. Es posible construir una de cero
+                        o utilizar la que existe por defecto. Es importante programar las acciones
+                        con <strong>Alpine.js</strong> para cada atributo <em>@click</em>.
+                    </p>
+                    <pre><code>
+                        &ltsection class="block hero has-background-dark"&gt
+                            &ltnav class="navbar"&gt
+                                &ltdiv class="navbar-start"&gt
+                                    &ltdiv class="navbar-item"&gt
+                                        &ltspan class="icon-text has-text-white is-size-7 clickable" @click="goHome" style="cursor: pointer;"&gt
+                                            &ltspan class="icon"&gt&lti class="fa-solid fa-house"&gt&lt/i&gt&lt/span&gt&ltspan&gtHome&lt/span&gt
+                                        &lt/span&gt
+                                    &lt/div&gt
+                                    &ltdiv class="navbar-item"&gt
+                                        &ltspan class="icon-text has-text-white is-size-7 clickable" @click="goBack" style="cursor: pointer;"&gt
+                                            &ltspan class="icon"&gt&lti class="fa-solid fa-rotate-left"&gt&lt/i&gt&lt/span&gt&ltspan&gtVolver&lt/span&gt
+                                        &lt/span&gt
+                                    &lt/div&gt
+                                    &ltdiv class="navbar-item"&gt
+                                        &ltspan class="icon-text has-text-white is-size-7 clickable" @click="goUsers"&gt
+                                            &ltspan class="icon"&gt&lti class="fa-solid fa-briefcase"&gt&lt/i&gt&lt/span&gt&ltspan&gtServicio {{ .Service }}&lt/span&gt
+                                        &lt/span&gt
+                                    &lt/div&gt
+                                &lt/div&gt
+                                &ltdiv class="navbar-end"&gt
+                                    &ltdiv class="navbar-item"&gt
+                                        &ltbutton class="button is-danger is-small" @click="logOut"&gt
+                                            &ltspan class="icon"&gt&lti class="fa-solid fa-arrow-right-from-bracket"&gt&lt/i&gt&lt/span&gt
+                                            &ltspan&gtCerrar Sesión&lt/span&gt
+                                        &lt/button&gt
+                                    &lt/div&gt
+                                &lt/div&gt
+                            &lt/nav&gt
+                        &lt/section&gt
+                    </code></pre>
+                </div>
+                <hr>
+                <div class="subtitle is-3">
+                    <span class="icon-text">
+                        <span class="icon"><i class="fa-brands fa-square-js"></i></i></span>
+                        <span id="frontend-js">( JS ) Frontend</span>
+                    </span>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5"> Alpine Componente</p>
+                    <p class="is-size-6">
+                        Antes de explicar código reutilizable es importante mencionar
+                        como iniciar un componente <strong>Alpine</strong>.
+                    </p>
+                    <pre><code>
+                        &lt!-- Recomiendo iniciar en el body y que el componente sea global para el servicio. --&gt
+                        &ltbody x-data="servicioComponent"&gt
+                    </code></pre>
+                    <pre><code>
+                        // servicioComponente se sustituye por el nombre deseado.
+                        document.addEventListener('alpine:init', () => {
+                            Alpine.data('servicioComponent', () => ({
+
+                            }))
+                        })
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">Navegación ( GoHome, GoBack, logOut, OnlyRedirect )</p>
+                    <p class="is-size-6">
+                        En esta sección se muestran 4 reutilizables de JavaScript que permiten
+                        redireccionar y navegar sin tener que programar desde 0.
+                        <em>
+                            El uso es extremadamente simple; el componente Alpine lo incia en el HTML,
+                            los mapeas con minuscula, y llamas a la funcion en mayusculas.
+                            Estas funionen ya se encargan de la seguirdad y sesión de usuario.
+                        </em>
+                    </p>
+                    <pre><code>
+                        // Unicamente GoBack y OnlyRedirect requieren del argumento "path"
+                        // un string de la ruta de redirección.
+                        async goHome() { await GoHome() },
+                        async goBack() { await GoBack(path) },
+                        async logOut() { await LogOut() },
+                        async goUsers() { await OnlyRedirect(path) },
+                    </code></pre>
+                </div>
+                <div class="block">
+                    <p class="subtitle is-5">
+                        CRUD ( ReadRecord, CreateRecord, UpdateRecord, DeleteRecord, FetchDataFromResponse )
+                    </p>
+                    <p class="is-size-6">
+                        Las funciones principales REST dependen de disparar la acción para cada
+                        tipo de metodo.
+                        La mejor manera es mediante el uso de funciones reutilizables JS.
+                    </p>
+                    <pre><code>
+                        // Leer un registro
+                        async openRecord(id) { await ReadRecord(id, readEndpoint) },
+
+                        // Crear registro
+                        async createRecord() {
+                        const values = { }
+                        await CreateRecord(createEndpoint, redirection, {method: "POST", body: JSON.stringify(values)})
+                        },
+
+                        // Actualizar un registro
+                        async updateRecord() {
+                            const record = JSON.stringify({ })
+                            await UpdateRecord(updateEndpoint, redirection, {method: "PUT", body: record})
+                        },
+
+                        // Eliminar registro
+                        async deleteRecord() {
+                            const record = JSON.stringify({ })
+                            return this.invalid = await DeleteRecord(deleteEndpoint, redirection, {method: "DELETE", body: record})
+                        },
+
+                        // Extraer data desde una respuesta JSON
+                        async loadRecords() {
+                            const data = await FetchDataFromResponse(pagesEndpoint)
+                        },
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 </section>
 </main>
 </body>
