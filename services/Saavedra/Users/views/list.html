@@ -81,7 +81,11 @@
             </div>
             <div class="column is-4">
                 <div class="buttons is-left">
-                    <button class="button is-info is-small is-rounded" @click="searchRecord">
+                    <button
+                        class="button is-info is-small is-rounded"
+                        @click="searchRecord"
+                        :disabled="pattern === ''"
+                    >
                         <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span>Buscar</span>
                     </button>

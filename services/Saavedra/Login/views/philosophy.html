@@ -92,6 +92,7 @@
                             <div class="content">
                                 <div>
                                     <pre><code class="language-go">
+                                        // Codigo explicito
                                         func (e Endpoint) CallEmployeesList(w http.ResponseWriter, r *http.Request) {
                                             page := r.URL.Query("page")
                                             records := e.service.EmployeesList(page)
