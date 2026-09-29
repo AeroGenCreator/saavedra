@@ -74,7 +74,7 @@
             <div class="column is-3">
                 <div class="field">
                     <div class="control is-small has-icons-left">
-                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="searchbar">
+                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="pattern">
                         <span class="icon is-small is-left"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
             <div class="column is-4">
                 <!-- Paginación de la vista lista -->
                 <div class="buttons is-right">
-                    <button class="button is-small is-warning" @click="previousPage" :disabled="page === 1 || loading">
+                    <button class="button is-small is-warning" @click="previousPage" :disabled="block">
                         <span class="icon"><i class="fa-solid fa-minus"></i></span>
                     </button>
                     <span class="button is-static is-small is-text" x-text="`Página ${page}`"></span>

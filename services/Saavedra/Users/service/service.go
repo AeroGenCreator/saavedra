@@ -14,7 +14,7 @@ type Service interface {
 	UpdateUser(user *types.User) error
 	DeleteUser(id int, rId string) error
 	Many2One() *types.Many2One
-	SearchUser(pattern string) (*types.UserSlice, error)
+	SearchUser(pattern, page string) (*types.UserSlice, error)
 }
 
 type service struct {
@@ -110,14 +110,22 @@ func (s service) Many2One() *types.Many2One {
 	return &types.Many2One{Parties: utils.Parties}
 }
 
-func (s service) SearchUser(pattern string) (*types.UserSlice, error) {
-	slice, err := s.store.SearcUser(pattern)
+func (s service) SearchUser(pattern, page string) (*types.UserSlice, error) {
+	intPage, err := strconv.Atoi(page)
+	if err != nil {
+		intPage = 1
+	}
+	var offset int
+	offset = (intPage - 1) * utils.RecordsPerSlice
+	slice, count, err := s.store.SearchUser(pattern, utils.RecordsPerSlice, offset)
 	if err != nil {
 		return nil, err
 	}
+	totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
+	hasNextPage := totalPages > intPage
 	records := types.UserSlice{
 		Records:     slice,
-		HasNextPage: false,
+		HasNextPage: hasNextPage,
 	}
 	return &records, err
 }

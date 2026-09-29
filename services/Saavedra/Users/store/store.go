@@ -12,7 +12,7 @@ type Store interface {
 	UpdateUser(user *types.User) error
 	UpdateUserNoPassword(user *types.User) error
 	DeleteUser(id int) error
-	SearcUser(pattern string) ([]*types.User, error)
+	SearchUser(pattern string, limit, offset int) ([]*types.User, int, error)
 }
 
 type store struct {
@@ -107,24 +107,29 @@ func (s store) DeleteUser(id int) error {
 	return nil
 }
 
-func (s store) SearcUser(pattern string) ([]*types.User, error) {
+func (s store) SearchUser(pattern string, limit, offset int) ([]*types.User, int, error) {
 	formatedPattern := "%" + pattern + "%"
-	q := `SELECT id, name, email, party FROM users WHERE name LIKE ?;`
-	rows, err := s.db.Query(q, formatedPattern)
+	q1 := `SELECT id, name, email, party FROM users WHERE name LIKE ? LIMIT ? OFFSET ?;`
+	q2 := `SELECT COUNT(id) AS count_id FROM users WHERE name LIKE ?;`
+	rows, err := s.db.Query(q1, formatedPattern, limit, offset)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	defer rows.Close()
 	var records []*types.User
 	for rows.Next() {
 		var record types.User
 		if err := rows.Scan(&record.Id, &record.Name, &record.Email, &record.Party); err != nil {
-			return nil, err
+			return nil, 0, err
 		}
 		records = append(records, &record)
 	}
 	if rows.Err() != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	return records, nil
+	var count int
+	if err := s.db.QueryRow(q2, formatedPattern).Scan(&count); err != nil {
+		return nil, 0, err
+	}
+	return records, count, nil
 }

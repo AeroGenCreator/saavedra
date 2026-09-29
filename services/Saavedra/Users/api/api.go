@@ -218,11 +218,13 @@ func (e EndpointHandler) CallUsersMany2One(w http.ResponseWriter, r *http.Reques
 	}
 }
 
+// ROUTE: "/users/search"
 func (e EndpointHandler) CallUsersSearch(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		pattern := r.URL.Query().Get("pattern")
-		slice, err := e.service.SearchUser(pattern)
+		page := r.URL.Query().Get("page")
+		slice, err := e.service.SearchUser(pattern, page)
 		if err != nil {
 			log.Printf("Error '/users/search' (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)

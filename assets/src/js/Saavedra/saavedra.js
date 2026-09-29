@@ -36,9 +36,12 @@ document.addEventListener('alpine:init', () => {
 
     records: [],
     page: 1,
+    searchPage: 1,
     hasNextPage: false,
-    searchbar: '',
+    pattern: '',
+    lastPattern: '',
     loading: false,
+    isSearch: false,
 
     async init() { await this.loadRecords() },
 
@@ -46,11 +49,34 @@ document.addEventListener('alpine:init', () => {
     async goBack() { await GoBack("/home") },
     async logOut() { await LogOut() },
     async goUsers() { await OnlyRedirect("/users") },
-    clean() { return (this.searchbar !== '') },
+    async newRecord() { await OnlyRedirect("/users/new") },
+    async openRecord(id) { await ReadRecord(id, "/users/record") },
+    clean() { return (this.pattern !== '') },
 
+    block() {
+      if (!this.isSearch) { return (this.page === 1 || this.loading) };
+      if (this.isSearch) { return (this.searchPage === 1 || this.loading) };
+    },
 
-    async previousPage() { if (this.page > 1) { this.page -= 1; await this.loadRecords() } },
-    async nextPage() { if (this.hasNextPage) { this.page += 1; await this.loadRecords() } },
+    async previousPage() {
+      if (!this.isSearch) {
+        if (this.page > 1) {
+          this.page -= 1;
+          return await this.loadRecords()
+        };
+      }
+      if (this.searchPage) {
+        if (this.searchPage > 1) {
+          this.searchPage -= 1;
+          return await this.searchRecord()
+        }
+      }
+    },
+
+    async nextPage() {
+      if (!this.isSearch) { if (this.hasNextPage) { this.page += 1; return await this.loadRecords() } }
+      if (this.isSearch) { if (this.hasNextPage) { this.searchPage += 1; return await this.searchRecord() } }
+    },
 
     async loadRecords() {
       try {
@@ -66,14 +92,20 @@ document.addEventListener('alpine:init', () => {
     },
 
     async cleanBar() {
-      this.searchbar = ''
+      this.isSearch = false;
+      this.searchPage = 1;
+      this.pattern = '';
+      this.page = 1;
       await this.loadRecords()
     },
 
     async searchRecord() {
       try {
         this.loading = true
-        const data = await FetchDataFromResponse(`/users/search?pattern=${this.searchbar}`)
+        this.isSearch = true
+        if (this.lastPattern !== '' && this.lastPattern !== this.pattern) { this.searchPage = 1};
+        const data = await FetchDataFromResponse(`/users/search?pattern=${this.pattern}&page=${this.searchPage}`)
+        this.lastPattern = this.pattern
         this.records = data.records
         this.hasNextPage = data.hasNextPage
       } catch (error) {
@@ -82,9 +114,6 @@ document.addEventListener('alpine:init', () => {
         this.loading = false
       }
     },
-
-    async newRecord() { await OnlyRedirect("/users/new") },
-    async openRecord(id) { await ReadRecord(id, "/users/record") },
 
   }))
 })
