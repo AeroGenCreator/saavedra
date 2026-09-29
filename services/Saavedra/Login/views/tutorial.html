@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bulma maneja los escalados automaticamente -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importar Bulma -->
+    <link rel="stylesheet" href="/assets/css/bulma/css/bulma.min.css">
+    <!-- Hoja de estilos de Saavedra -->
+    <link rel="stylesheet" href="/assets/css/saavedra/saavedra.css">
+    <!-- Resaltado de color CODIGO -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/nord.min.css">
+    <!-- Importar Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/75d1a8fea1.js" crossorigin="anonymous"></script>
+    <!-- Importar Codigo JavaScript Reutilizable -->
+    <script defer src="/assets/src/utils/utils.js"></script>
+    <!-- Importar Codigo JavaScript del servicio en cuestión -->
+    <script defer src="/assets/src/js/Saavedra/saavedra.js"></script>
+    <!-- Importar Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.17.3/dist/cdn.min.js"></script>
+    <!-- Librería Highlight.js y activación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Opcional: Cargar explícitamente el paquete de lenguaje Go si usas una versión reducida -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <!-- Activar script de Resaltado de color -->
+    <script>hljs.highlightAll();</script>
+    <title>{{ .Title }}</title>
+</head>
+<body>
+<main>
+
+<div class="container">
+
+    <section id="comments-tutorial" class="section px-0">
+        <div class="notification is-dark">
+            <div class="block has-text-white has-text-left">
+                <h1 class="title is-1">Saavedra Tutorial</h1>
+                <p>
+                    El tutorial enseña la contrucción de un CRUD desde cero utilizando herramientas de Saavedra.
+                    Asi mismo es importante mencionar que se vera la distribución de capas y jerarquia de directorios
+                    dentro de Saavedra.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="columns-tutorial">
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <div class="box stick">
+                    <div class="block">
+                        <div class="title is-3 has-text-centered">
+                            <span class="icon-text">
+                                <span class="icon"><i class="fa-solid fa-tree"></i></span>
+                                <span>Índice</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="content is-size-7">
+                        <ul class="py-6">
+
+                        </ul>
+                        <div class="buttons">
+                            <button
+                                class="button is-fullwidth is-dark"
+                                x-data="{ up(){window.location.href='#comments-tutorial'} }"
+                                @click="up">
+                                <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
+                                <span>Subir</span>
+                            </button>
+                            <button
+                                class="button is-fullwidth is-dark"
+                                x-data="{ root(){window.location.href='/'} }"
+                                @click="root">
+                                <span class="icon"><i class="fa-solid fa-house"></i></span>
+                                <span>Inicio</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-four-fiths">
+                <div class="box">
+                    <section id="backend-tutorial" class="section">
+                    </section>
+                    <section id="frontend-tutorial" class="section">
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</main>
+</body>
+</html>

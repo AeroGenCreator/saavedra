@@ -8,6 +8,7 @@ document.addEventListener('alpine:init', () => {
     close(){this.status = false},
     goDocs() { window.location.href = "/docs" },
     goPhil() { window.location.href = "/philosophy" },
+    goTutorial() { window.location.href = "/tutorial" },
 
     async login() {
       const credentials = { "email": this.email, "password": this.password }
