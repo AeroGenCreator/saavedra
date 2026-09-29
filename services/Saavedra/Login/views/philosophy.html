@@ -18,6 +18,12 @@
     <script defer src="/assets/src/js/Saavedra/saavedra.js"></script>
     <!-- Importar Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.17.3/dist/cdn.min.js"></script>
+    <!-- Librería Highlight.js y activación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Opcional: Cargar explícitamente el paquete de lenguaje Go si usas una versión reducida -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <!-- Activar script de Resaltado de color -->
+    <script>hljs.highlightAll();</script>
     <title>{{ .Title }}</title>
 </head>
 <body>
@@ -111,13 +117,18 @@
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="buttons is-right">
+                    <button
+                        class="button is-dark px-6"
+                        x-data="{ root(){window.location.href='/'} }"
+                        @click="root">
+                        <span class="icon"><i class="fa-solid fa-house"></i></span>
+                        <span>Inicio</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
-    <!-- 3. Librería Highlight.js y activación -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-      <!-- Opcional: Cargar explícitamente el paquete de lenguaje Go si usas una versión reducida -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-      <script>
-          hljs.highlightAll();
-      </script>
 </body>
+</html>

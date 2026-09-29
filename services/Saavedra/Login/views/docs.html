@@ -33,12 +33,12 @@
 <section class="section">
     <div class="container">
         <!-- Titulo -->
-        <div class="notification is-info is-light has-text-centered">
-            <div class="block has-text-black">
+        <div class="notification is-dark has-text-left mb-6">
+            <div class="block has-text-white">
                 <div class="title is-3">
-                    <span id="documentation">Documentación</span>
+                    <p id="documentation">Documentación</p>
                 </div>
-                <div class="is-size-7">
+                <div class="is-size-6">
                     <p>
                         A diferencia de frameworks complejos,
                         Saavedra cuenta con poca documentación,
@@ -88,14 +88,14 @@
                         </ul>
                         <div class="buttons">
                             <button
-                                class="button is-fullwidth is-primary is-small"
+                                class="button is-fullwidth is-dark"
                                 x-data="{ up(){window.location.href='#documentation'} }"
                                 @click="up">
                                 <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
-                                <span>Volver Arriba</span>
+                                <span>Subir</span>
                             </button>
                             <button
-                                class="button is-fullwidth is-warning is-small"
+                                class="button is-fullwidth is-dark"
                                 x-data="{ root(){window.location.href='/'} }"
                                 @click="root">
                                 <span class="icon"><i class="fa-solid fa-house"></i></span>

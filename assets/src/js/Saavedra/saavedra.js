@@ -5,6 +5,9 @@ document.addEventListener('alpine:init', () => {
     status: false,
 
     unlock() { return (this.email === '' || this.password === '') },
+    close(){this.status = false},
+    goDocs() { window.location.href = "/docs" },
+    goPhil() { window.location.href = "/philosophy" },
 
     async login() {
       const credentials = { "email": this.email, "password": this.password }

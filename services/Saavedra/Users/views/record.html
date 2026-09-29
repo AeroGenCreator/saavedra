@@ -65,12 +65,16 @@
         <div class="box">
             <!-- Espacio para botones. -->
             <div class="columns">
-                <div class="column is-12">
+                <div class="column is-6">
                     <div class="buttons">
                         <button class="button is-info is-small" @click="updateRecord" :disabled="required">
                             <span class="icon"><i class="fa-solid fa-floppy-disk"></i></span>
                             <span>Guardar Cambios</span>
                         </button>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <div class="buttons is-right">
                         <button class="button is-danger is-small" @click="deleteRecord">
                             <span class="icon"><i class="fa-solid fa-trash-can"></i></span>
                             <span>Eliminar Registro</span>
