@@ -1,3 +1,5 @@
+## VISTA LISTA
+
 ```html
 <!-- PLANTILLA: VISTA LISTA -->
 <body x-data="Componente">
@@ -167,4 +169,66 @@ document.addEventListener('alpine:init', () => {
 
   }))
 })
+```
+
+## VISTA FORMULARIO NUEVO
+
+```html
+<main class="hero">
+<section class="container">
+    <div class="box">
+        <div class="columns">
+            <div class="column is-12">
+                <div class="buttons">
+                    <button class="button is-info is-small" @click="createRecord" :disabled="required">
+                        <span class="icon"><i class="fa-solid fa-floppy-disk"></i></span>
+                        <span>Crear Registro</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-12" x-show="message">
+                <div class="notification is-danger is-light">
+                    <button class="delete" @click="close"></button>
+                    <p class="has-text-left is-size-7">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                            <span>
+                                Falla en la validación de contraseña o de correo electrónico;
+                                revisar información y reintentar el envío del formulario.
+                            </span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="columns">
+            <!-- INPUT -->
+            <div class="column is-4">
+                <label class="label is-small">...</label>
+                <div class="control has-icons-left">
+                    <input class="input is-small" type="" placeholder="" x-model=""/>
+                    <span class="icon is-small is-left"><!-- ICON --></span>
+                </div>
+            </div>
+            <!-- SELECTION -->
+            <div class="column is-2">
+                <label class="label is-small">...</label>
+                <div class="control has-icons-left">
+                    <input class="input is-small" list="list-id" id="input-id" placeholder="" x-model="">
+                    <span class="icon is-small is-left"><!-- ICON --></span>
+                    <datalist id="list-id">
+                        <template x-for="" :key="">
+                            <option :value="" x-text=""></option>
+                        </template>
+                    </datalist>
+                </div>
+            </div>    
+        </div>
+
+    </div>
+</section>
+</main>
 ```

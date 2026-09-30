@@ -90,3 +90,28 @@ document.addEventListener('alpine:init', () => {
 
   }))
 })
+
+document.addEventListener('alpine:init', () => {
+  Alpine.data("employeesNewComponent", () => ({
+    name: '',
+    hireDate: null,
+    dailyPayment: "",
+    phone: null,
+    email: '',
+    nss: '',
+    curp: '',
+
+    init() {
+      $watch('dailyPayment', value => {
+        const float = ValidateFloatStringToFloat(value);
+        this.dailyPayment = FormatterMXN.format(float);
+      })
+    },
+
+    async goHome() { await GoHome() },
+    async goBack() { await GoBack("/employee") },
+    async logOut() { await LogOut() },
+    async goEmployees() { await OnlyRedirect("/employee") },
+
+  }))
+})

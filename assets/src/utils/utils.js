@@ -234,3 +234,8 @@ const FormatterMXN = new Intl.NumberFormat('es-MX', {
   style: 'currency',
   currency: 'MXN',
 });
+
+function ValidateFloatStringToFloat(string) {
+  const regex = /[^\d.]\,/g;
+  return parseFloat(string.replaceAll(regex))
+}
