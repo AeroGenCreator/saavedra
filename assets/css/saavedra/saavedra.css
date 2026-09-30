@@ -9,8 +9,8 @@
 }
 
 .menuitem {
-    height: 105px;
-    overflow: scroll;
+    height: 120px;
+    overflow: hidden;
 }
 
 .focus {
@@ -19,26 +19,6 @@
 
 .focus:hover {
     filter: brightness(1.10);
-}
-
-.wallpaper {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image:
-    linear-gradient(rgba(0, 0, 0, 0.75)),
-    url("/assets/img/saavedra/code.jpg");
-    padding: 0rem 2rem 2rem;
-}
-
-.wallpaper-text {
-    text-align: start;
-    font-family: BlinkMacSystemFont, Helvetica, sans-serif;
-    color: white;
-    font-weight: bolder;
-    font-style: normal;
-    font-size: 80px;
-    padding: 1cm 0 0;
 }
 
 .article {

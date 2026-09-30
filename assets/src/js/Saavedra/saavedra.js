@@ -25,13 +25,13 @@ document.addEventListener('alpine:init', () => {
 
     message: false,
 
+    async goEmployees() { this.message = await OnlyRedirect("/employee") },
+    async goUsers() { this.message = await OnlyRedirect("/users") },
+
     async goHome() { await GoHome() },
     async goBack() { await GoBack() },
     async logOut() { await LogOut() },
     async close() { this.message = false },
-
-    async goUsers() { this.message = await OnlyRedirect("/users") },
-    async goEmployee() { this.message = await OnlyRedirect("/employee") },
 
   }))
 })
