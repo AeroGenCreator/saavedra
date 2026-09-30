@@ -6,7 +6,7 @@
         <div class="columns">
             <div class="column is-1">
                 <div class="buttons is-left">
-                    <button class="button is-primary is-small is-fullwidth is-rounded" @click="">
+                    <button class="button is-primary is-small is-fullwidth is-rounded" @click="newRecord">
                         <span class="icon"><i class="fa-solid fa-circle-plus"></i></span>
                         <span>Nuevo</span>
                     </button>
@@ -15,7 +15,7 @@
             <div class="column is-3">
                 <div class="field">
                     <div class="control is-small has-icons-left">
-                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="">
+                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="pattern">
                         <span class="icon is-small is-left"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
                 </div>
@@ -24,13 +24,13 @@
                 <div class="buttons is-left">
                     <button
                         class="button is-info is-small is-rounded"
-                        @click=""
-                        :disabled=""
+                        @click="search"
+                        :disabled="(pattern === '')"
                     >
                         <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span>Buscar</span>
                     </button>
-                    <button class="button is-danger is-small is-rounded" @click="" x-show="">
+                    <button class="button is-danger is-small is-rounded" @click="clean" x-show="(pattern !== '')">
                         <span class="icon"><i class="fa-solid fa-spray-can-sparkles"></i></span>
                         <span>Limpiar</span>
                     </button>
@@ -38,11 +38,15 @@
             </div>
             <div class="column is-4">
                 <div class="buttons is-right">
-                    <button class="button is-small is-warning" @click="" :disabled="">
+                    <button
+                        class="button is-small is-warning"
+                        @click="previousPage"
+                        :disabled="block"
+                    >
                         <span class="icon"><i class="fa-solid fa-minus"></i></span>
                     </button>
                     <span class="button is-static is-small is-text" x-text="`Página ${page}`"></span>
-                    <button class="button is-small is-warning" @click="" :disabled="">
+                    <button class="button is-small is-warning" @click="nextPage" :disabled="(!hasNextPage || loading)">
                         <span class="icon"><i class="fa-solid fa-plus"></i></span>
                     </button>
                 </div>
@@ -56,16 +60,111 @@
             </thead>
             <tbody>
                 <template x-for="" :key="">
-                    <tr @click="" class="focus">
+                    <tr @click="openRecord()" class="focus">
                         <td x-text=""></td>
                     </tr>
                 </template>
-                <tr x-show="">
-                    <td colspan="1">...</td>
+                <tr x-show="(records === [])">
+                    <td colspan="8">...</td>
                 </tr>
             </tbody>
         </table>
     </section>
 </main>
-</body>
+```
+
+```js
+// COMPONENTE PARA UNA VISTA LISTA BASADO EN LA PLANTILLA ANTERIOR
+document.addEventListener('alpine:init', () => {
+  Alpine.data("employeesListComponent", () => ({
+
+    page: 1,
+    pageSearch: 1,
+    records: [],
+    loading: false,
+    hasNextPage: false,
+    pattern: '',
+    patternLast: '',
+    isSearch: false,
+
+    async init() { this.loadRecords() },
+
+    async goHome() { await GoHome() },
+    async goBack() { await GoBack("") },
+    async logOut() { await LogOut() },
+    async openRecord(id) { await ReadRecord(id, "") },
+    async newRecord() { await OnlyRedirect("") },
+    async goEmployee() { await OnlyRedirect("") },
+
+    currency() {
+      for (const item of this.records) {
+        const money = FormatterMXN.format(item.dailyPayment)
+        item.dailyPayment = money
+      }
+    },
+
+    async clean() {
+      this.isSearch = false; this.pageSearch = 1; this.pattern = ''; this.page = 1; return await this.loadRecords()
+    },
+
+    async search() {
+      try {
+        this.loading = true
+        this.isSearch = true
+        if (this.patternLast !== '' && this.patternLast !== this.pattern) { this.pageSearch = 1};
+        const data = await FetchDataFromResponse(
+          `?pattern=${this.pattern}&page=${this.pageSearch}`
+        )
+        this.patternLast = this.pattern; this.records = data.records; this.hasNextPage = data.hasNextPage;
+        this.currency();
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async loadRecords() {
+      try {
+        this.loading = true
+        const data = await FetchDataFromResponse(
+          `?page=${this.page}`
+        )
+        this.records = data.records;
+        this.hasNextPage = data.hasNextPage;
+        this.currency();
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    block() {
+      if (!this.isSearch) { return (this.page === 1 || this.loading) };
+      if (this.isSearch) { return (this.pageSearch === 1 || this.loading) };
+    },
+
+    async previousPage() {
+      if (!this.isSearch) {
+        if (this.page > 1) {
+          this.page -= 1;
+          return await this.loadRecords()
+        };
+      }
+      if (this.pageSearch) {
+        if (this.pageSearch > 1) {
+          this.pageSearch -= 1;
+          return await this.search()
+        }
+      }
+    },
+
+    async nextPage() {
+      if (!this.isSearch) { if (this.hasNextPage) { this.page += 1; return await this.loadRecords() } }
+      if (this.isSearch) { if (this.hasNextPage) { this.pageSearch += 1; return await this.search() } }
+    },
+
+  }))
+})
 ```

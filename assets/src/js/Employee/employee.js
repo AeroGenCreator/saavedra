@@ -2,27 +2,90 @@ document.addEventListener('alpine:init', () => {
   Alpine.data("employeesListComponent", () => ({
 
     page: 1,
+    pageSearch: 1,
     records: [],
     loading: false,
     hasNextPage: false,
-    regex: '',
+    pattern: '',
+    patternLast: '',
+    isSearch: false,
 
     async init() { this.loadRecords() },
 
     async goHome() { await GoHome() },
     async goBack() { await GoBack("/home") },
     async logOut() { await LogOut() },
+    async openRecord(id) { await ReadRecord(id, "/employee/record") },
+    async newRecord() { await OnlyRedirect("/employee/new") },
     async goEmployee() { await OnlyRedirect("/employee") },
+
+    currency() {
+      for (const item of this.records) {
+        const money = FormatterMXN.format(item.dailyPayment)
+        item.dailyPayment = money
+      }
+    },
+
+    async clean() {
+      this.isSearch = false; this.pageSearch = 1; this.pattern = ''; this.page = 1; return await this.loadRecords()
+    },
+
+    async search() {
+      try {
+        this.loading = true
+        this.isSearch = true
+        if (this.patternLast !== '' && this.patternLast !== this.pattern) { this.pageSearch = 1};
+        const data = await FetchDataFromResponse(
+          `/employee/search?pattern=${this.pattern}&page=${this.pageSearch}`
+        )
+        this.patternLast = this.pattern; this.records = data.records; this.hasNextPage = data.hasNextPage;
+        this.currency();
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
 
     async loadRecords() {
       try {
         this.loading = true
-        const data = await FetchDataFromResponse(`/employee/slice?page=${this.page}`)
-        this.records = data.records
-        this.hasNextPage = data.hasNextPage
+        const data = await FetchDataFromResponse(
+          `/employee/slice?page=${this.page}`
+        )
+        this.records = data.records;
+        this.hasNextPage = data.hasNextPage;
+        this.currency();
       } catch (error) {
         throw error
+      } finally {
+        this.loading = false
       }
+    },
+
+    block() {
+      if (!this.isSearch) { return (this.page === 1 || this.loading) };
+      if (this.isSearch) { return (this.pageSearch === 1 || this.loading) };
+    },
+
+    async previousPage() {
+      if (!this.isSearch) {
+        if (this.page > 1) {
+          this.page -= 1;
+          return await this.loadRecords()
+        };
+      }
+      if (this.pageSearch) {
+        if (this.pageSearch > 1) {
+          this.pageSearch -= 1;
+          return await this.search()
+        }
+      }
+    },
+
+    async nextPage() {
+      if (!this.isSearch) { if (this.hasNextPage) { this.page += 1; return await this.loadRecords() } }
+      if (this.isSearch) { if (this.hasNextPage) { this.pageSearch += 1; return await this.search() } }
     },
 
   }))

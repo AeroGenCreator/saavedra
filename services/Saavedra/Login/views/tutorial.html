@@ -36,6 +36,9 @@
             <div class="block has-text-white has-text-left">
                 <h1 class="title is-1">Saavedra Tutorial</h1>
                 <p>
+                    Antes de comenzar a desarrolla es importante <a href="">obtener Saavedra</a>.
+                </p>
+                <p>
                     El tutorial enseña la contrucción de un CRUD desde cero utilizando herramientas de Saavedra.
                     Asi mismo es importante mencionar que se vera la distribución de capas y jerarquia de directorios
                     dentro de Saavedra.
@@ -58,7 +61,10 @@
                     </div>
                     <div class="content is-size-7">
                         <ul class="py-6">
-
+                            <a href="#jerarquia-tutorial"><li>Proyecto</li></a>
+                            <ul>
+                                <a href="#rutas"><li>Rutas</li></a>
+                            </ul>
                         </ul>
                         <div class="buttons">
                             <button
@@ -81,8 +87,64 @@
             </div>
             <div class="column is-four-fiths">
                 <div class="box">
+
+                    <section id="jerarquia-tutorial" class="section">
+
+                        <div class="subtitle is-3">
+                            <span class="icon-text">
+                                <span class="icon"><i class="fa-solid fa-sitemap"></i></span>
+                                <span id="backend">Proyecto</span>
+                            </span>
+                        </div>
+
+                        <div class="block" id="rutas">
+                            <p class="subtitle is-5">Rutas</p>
+                            <div class="content is-size-6">
+                                <p>
+                                    El directorio <strong>assets</strong> es servido por Saavedra.
+                                    Permite la importación de componentes ( JS ).
+                                </p>
+                                <p>
+                                    Cada nuevo servicio requiere de agregar un
+                                    <strong>( menuitem )</strong>
+                                    en <strong>( home.html)</strong>
+                                    y su accion en <strong>( saavedra.js )</strong>.
+                                </p>
+                                <blockquote>
+                                    <em>/assets/src/js/Saavedra/saavedra.js</em>
+                                </blockquote>
+                                <blockquote>
+                                    <em>/services/Saavedra/Home/views/home.html</em>
+                                </blockquote>
+                            <pre><code>
+                                └── saavedra/
+                                    ├── assets/
+                                    │   ├── css/
+                                    │   ├── icon/
+                                    │   ├── img/
+                                    │   └── src/
+                                    │       ├── js/
+                                    │       │   ├── Saavedra/
+                                    │       │   └── servicios...
+                                    │       └── utils/
+                                    ├── config/
+                                    ├── db/
+                                    ├── docker/
+                                    ├── services/
+                                    │   ├── Saavedra/
+                                    │   │   ├── Home
+                                    │   │   └── ...
+                                    │   └── servicios...
+                                    ├── utils/
+                                    ├── .env
+                                    └── main.go
+                            </code></pre>
+                        </div>
+                    </section>
+
                     <section id="backend-tutorial" class="section">
                     </section>
+
                     <section id="frontend-tutorial" class="section">
                     </section>
                 </div>

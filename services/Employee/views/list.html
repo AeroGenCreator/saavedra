@@ -48,7 +48,7 @@
         <div class="columns">
             <div class="column is-1">
                 <div class="buttons is-left">
-                    <button class="button is-primary is-small is-fullwidth is-rounded" @click="">
+                    <button class="button is-primary is-small is-fullwidth is-rounded" @click="newRecord">
                         <span class="icon"><i class="fa-solid fa-circle-plus"></i></span>
                         <span>Nuevo</span>
                     </button>
@@ -57,7 +57,7 @@
             <div class="column is-3">
                 <div class="field">
                     <div class="control is-small has-icons-left">
-                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="regex">
+                        <input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="pattern">
                         <span class="icon is-small is-left"><i class="fa-solid fa-magnifying-glass"></i></span>
                     </div>
                 </div>
@@ -66,13 +66,13 @@
                 <div class="buttons is-left">
                     <button
                         class="button is-info is-small is-rounded"
-                        @click=""
-                        :disabled=""
+                        @click="search"
+                        :disabled="(pattern === '')"
                     >
                         <span class="icon"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <span>Buscar</span>
                     </button>
-                    <button class="button is-danger is-small is-rounded" @click="" x-show="(regex !== '')">
+                    <button class="button is-danger is-small is-rounded" @click="clean" x-show="(pattern !== '')">
                         <span class="icon"><i class="fa-solid fa-spray-can-sparkles"></i></span>
                         <span>Limpiar</span>
                     </button>
@@ -80,11 +80,15 @@
             </div>
             <div class="column is-4">
                 <div class="buttons is-right">
-                    <button class="button is-small is-warning" @click="" :disabled="">
+                    <button
+                        class="button is-small is-warning"
+                        @click="previousPage"
+                        :disabled="block"
+                    >
                         <span class="icon"><i class="fa-solid fa-minus"></i></span>
                     </button>
                     <span class="button is-static is-small is-text" x-text="`Página ${page}`"></span>
-                    <button class="button is-small is-warning" @click="" :disabled="">
+                    <button class="button is-small is-warning" @click="nextPage" :disabled="(!hasNextPage || loading)">
                         <span class="icon"><i class="fa-solid fa-plus"></i></span>
                     </button>
                 </div>
@@ -97,8 +101,8 @@
                     <th>Nombre</th>
                     <th>Contratado</th>
                     <th>Sueldo Diario</th>
-                    <th>Phone</th>
-                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
                     <th>NSS</th>
                     <th>CURP</th>
                 </tr>
