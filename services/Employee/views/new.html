@@ -94,14 +94,26 @@
             <div class="column is-4">
                 <label class="label is-small">Sueldo Diario</label>
                 <div class="control has-icons-left">
-                    <input class="input is-small" type="text" placeholder="120.50" x-model="dailyPayment"/>
+                    <input
+                        class="input is-small"
+                        type="text"
+                        placeholder="120.50"
+                        x-model="dailyPayment"
+                        @blur="dailyPayment = currency($event.target.value)"
+                    />
                     <span class="icon is-small is-left"><i class="fa-solid fa-coins"></i></span>
                 </div>
             </div>
             <div class="column is-4">
                 <label class="label is-small">Telefono</label>
                 <div class="control has-icons-left">
-                    <input class="input is-small" type="tel" placeholder="type number" x-model="phone"/>
+                    <input
+                        class="input is-small"
+                        type="tel"
+                        placeholder="type number"
+                        x-model="phone"
+                        @blur="phone = numbers($event.target.value)"
+                    />
                     <span class="icon is-small is-left"><i class="fa-solid fa-phone"></i></span>
                 </div>
             </div>

@@ -27,3 +27,4 @@ type SaavedraConfigFile struct {
 type ContextKey string
 
 var NoUserPartyPermission = errors.New("Permissions were added to an endpoint but no user party data provided.")
+var DuplicatedDataError = errors.New("Duplicated data, check information | Datos duplicados, revisar información")

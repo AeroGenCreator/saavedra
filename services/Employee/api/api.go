@@ -115,7 +115,12 @@ func (e EndpointHandler) CallEmployeesNew(w http.ResponseWriter, r *http.Request
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		if err := e.service.CreateEmployee(&record); err != nil {
+		err = e.service.CreateEmployee(&record)
+		if err == utils.DuplicatedDataError {
+			log.Print(utils.DuplicatedDataError.Error())
+			http.Error(w, utils.DuplicatedDataError.Error(), http.StatusConflict)
+			return
+		} else if err != nil {
 			log.Printf("Error '/employee/new' (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

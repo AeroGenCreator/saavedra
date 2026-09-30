@@ -133,11 +133,16 @@ async function ReadRecord(id, redirect) {
 
 async function CreateRecord(path, redirect, options = {}) {
   try {
-    var object = {"message": false}
+    var status = {"authError": false}
     const res = await SecureFetching(path, options)
     if (!res.ok) {
       if (res.status === 401) {
-        return object.message = true
+        status.authError = true
+        return status
+      } else if (res.status === 409) {
+        const duplicated = await response.text()
+        alert(duplicated)
+        return
       } else {
         throw new Error(res.status)
       }
@@ -237,5 +242,10 @@ const FormatterMXN = new Intl.NumberFormat('es-MX', {
 
 function ValidateFloatStringToFloat(string) {
   const regex = /[^\d.]\,/g;
-  return parseFloat(string.replaceAll(regex))
+  return parseFloat(string.replaceAll(regex, ""))
+}
+
+function ValidateIntegerStringToInteger(string) {
+  const regex = /[^\d]/g;
+  return parseFloat(string.replaceAll(regex, ""))
 }

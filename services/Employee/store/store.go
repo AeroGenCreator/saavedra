@@ -3,6 +3,7 @@ package store
 import (
 	"database/sql"
 	"saavedra/services/Employee/types"
+	utils "saavedra/utils"
 )
 
 type Store interface {
@@ -56,22 +57,31 @@ func (s store) SliceEmployee(limit, offset int) ([]*types.Employee, int, error) 
 }
 
 func (s store) CreateEmployee(employee *types.Employee) error {
-	q := `
-	INSERT INTO employee(name, hire_date, daily_payment, phone, email, nss, curp)
-	VALUES (?, ?, ?, ?, ?, ?, ?)
-	ON CONFLICT DO NOTHING;`
+	c := `SELECT id FROM employee WHERE email = ? OR nss = ? OR curp = ?;`
+	q := `INSERT INTO employee(name, hire_date, daily_payment, phone, email, nss, curp) VALUES (?, ?, ?, ?, ?, ?, ?);`
 
-	res, err := s.db.Exec(q, employee.Name, employee.HireDate, employee.DailyPayment, employee.Phone, employee.Email, employee.Nss, employee.Curp)
-	if err != nil {
+	var id int
+	err := s.db.QueryRow(c, employee.Email, employee.Nss, employee.Curp).Scan(&id)
+	if err == nil {
+		return utils.DuplicatedDataError
+	}
+	if err != sql.ErrNoRows {
 		return err
 	}
 
-	id, err := res.LastInsertId()
+	_, err = s.db.Exec(
+		q,
+		employee.Name,
+		employee.HireDate,
+		employee.DailyPayment,
+		employee.Phone,
+		employee.Email,
+		employee.Nss,
+		employee.Curp,
+	)
 	if err != nil {
-		return err
+		return utils.DuplicatedDataError
 	}
-
-	employee.Id = int(id)
 	return nil
 }
 

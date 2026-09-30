@@ -5,7 +5,7 @@ type Employee struct {
 	Name         string  `json:"name"`
 	HireDate     string  `json:"hireDate"`
 	DailyPayment float64 `json:"dailyPayment"`
-	Phone        string  `json:"phone"`
+	Phone        int     `json:"phone"`
 	Email        string  `json:"email"`
 	Nss          string  `json:"nss"`
 	Curp         string  `json:"curp"`

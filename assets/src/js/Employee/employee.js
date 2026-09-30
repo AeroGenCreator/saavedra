@@ -20,6 +20,7 @@ document.addEventListener('alpine:init', () => {
     async goEmployee() { await OnlyRedirect("/employee") },
 
     currency() {
+      if (!this.records) { return }
       for (const item of this.records) {
         const money = FormatterMXN.format(item.dailyPayment)
         item.dailyPayment = money
@@ -93,25 +94,58 @@ document.addEventListener('alpine:init', () => {
 
 document.addEventListener('alpine:init', () => {
   Alpine.data("employeesNewComponent", () => ({
+
+    message: false,
     name: '',
-    hireDate: null,
-    dailyPayment: "",
-    phone: null,
+    hireDate: '',
+    dailyPayment: '',
+    phone: '',
     email: '',
     nss: '',
     curp: '',
-
-    init() {
-      $watch('dailyPayment', value => {
-        const float = ValidateFloatStringToFloat(value);
-        this.dailyPayment = FormatterMXN.format(float);
-      })
-    },
+    loading: false,
 
     async goHome() { await GoHome() },
     async goBack() { await GoBack("/employee") },
     async logOut() { await LogOut() },
     async goEmployees() { await OnlyRedirect("/employee") },
+
+    required() {
+      return (this.name === '' || this.hireDate === '' || this.dailyPayment === '', this.loading)
+    },
+
+    currency(str) {
+      const float = ValidateFloatStringToFloat(str)
+      if (isNaN(float)) { return '' }
+      return FormatterMXN.format(float)
+    },
+
+    numbers(str) {
+      const integer = ValidateIntegerStringToInteger(str)
+      if (isNaN(integer)) { return '' }
+      return String(integer)
+    },
+
+    async createRecord() {
+      try {
+        this.loading = true
+        const payment = ValidateFloatStringToFloat(this.dailyPayment)
+        const number = ValidateIntegerStringToInteger(this.phone)
+        var values = JSON.stringify({
+          name: this.name,
+          hireDate: this.hireDate,
+          dailyPayment: payment,
+          phone: number,
+          email: this.email,
+          nss: this.nss,
+          curp: this.curp
+        })
+        const authError = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
+        this.message = authError
+      } catch (error) {
+        throw error
+      }
+    },
 
   }))
 })
