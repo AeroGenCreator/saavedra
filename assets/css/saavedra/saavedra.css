@@ -10,7 +10,7 @@
 
 .menuitem {
     height: 105px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .focus {

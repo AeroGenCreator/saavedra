@@ -69,22 +69,35 @@
                 </p>
             </div>
         </div>
+    </div>
         <!-- ITEMS DE MENU -->
         <!-- ANCHO POR DEFECTO DE LA COLUMNA -->
+    <div class="columns">
+
         <div class="column is-3">
             <!-- NOTIFICACION BULMA CSS + CLICKABLE (HOVER) + MENUITEM (ESCONDE TEXTOS LARGOS) -->
-            <a @click="goUsers">
-                <div class="notification is-primary clickable menuitem focus">
-                    <span class="icon-text">
-                        <!-- ICONOS INTERCAMBIABLES -->
-                        <span class="icon"><i class="fa-solid fa-users"></i></span>
-                        <span><h2 class="subtitle">Usuarios</h2></span>
-                    </span>
-                    <!-- DESCRIPCIÓN CORTA DEL SERVICIO -->
-                    <p class="is-size-7">Agregar, editar y eliminar usuarios.</p>
-                </div>
-            </a>
+            <div class="notification is-primary clickable menuitem focus" @click="goUsers">
+                <span class="icon-text">
+                    <!-- ICONOS INTERCAMBIABLES -->
+                    <span class="icon"><i class="fa-solid fa-users"></i></span>
+                    <span><h2 class="subtitle">Usuarios</h2></span>
+                </span>
+                <!-- DESCRIPCIÓN CORTA DEL SERVICIO -->
+                <p class="is-size-7">Agregar, editar y eliminar usuarios.</p>
+            </div>
         </div>
+
+        <div class="column is-3">
+            <!-- Manejar Acciones Con Alpine -->
+            <div class="notification is-info clickable menuitem focus" @click="goEmployee">
+                <span class="icon-text">
+                    <span class="icon"><i class="fa-solid fa-user-tie"></i></span>
+                    <span><h2 class="subtitle">Empleados</h2></span>
+                <span>
+                <p class="is-size-7">Administración de empleados<p>
+            <div>
+        <div>
+
     </div>
 </section>
 

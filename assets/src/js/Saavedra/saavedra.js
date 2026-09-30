@@ -31,6 +31,7 @@ document.addEventListener('alpine:init', () => {
     async close() { this.message = false },
 
     async goUsers() { this.message = await OnlyRedirect("/users") },
+    async goEmployee() { this.message = await OnlyRedirect("/employee") },
 
   }))
 })

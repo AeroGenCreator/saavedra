@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	employeeRouter "saavedra/services/Employee/router"
+	employeeSQL "saavedra/services/Employee/sql"
 	homeRouter "saavedra/services/Saavedra/Home/router"
 	loginRouter "saavedra/services/Saavedra/Login/router"
 	serveAssets "saavedra/services/Saavedra/ServeFiles/router"
@@ -51,6 +53,9 @@ func main() {
 	if err = sessionSQL.CreateSchema(db); err != nil {
 		log.Fatal(err.Error())
 	}
+	if err = employeeSQL.CreateSchema(db); err != nil {
+		log.Fatal(err.Error())
+	}
 
 	// Crear usuario admin o remplazar credenciales.
 	utils.InsertAdmin(db)
@@ -66,6 +71,7 @@ func main() {
 	sessionRouter.Assambler(mux, db)
 	homeRouter.Assambler(mux)
 	usersRouter.Assambler(mux, db)
+	employeeRouter.Assambler(mux, db)
 
 	// Levantar Servidor
 	fmt.Printf("🚀 Server listening on: http://%v:%v", utils.Host, utils.Port)
