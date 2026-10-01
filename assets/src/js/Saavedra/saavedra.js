@@ -259,7 +259,6 @@ document.addEventListener('alpine:init', () => {
         const record = JSON.stringify(
           { "id": id, "name": this.name, "email": this.email, "password": checkPass, "party": this.party }
         )
-        debugger;
         await UpdateRecord("/users/record", "/users", {method: "PUT", body: record})
       } catch (error) {
         throw error

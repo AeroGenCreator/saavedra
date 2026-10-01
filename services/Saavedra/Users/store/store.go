@@ -92,7 +92,7 @@ func (s store) UpdateUser(user *types.User) error {
 
 func (s store) UpdateUserNoPassword(user *types.User) error {
 	q := "UPDATE users SET name = ?, email = ?, party = ? WHERE id = ?;"
-	_, err := s.db.Exec(q, user.Name, user.Email, user.Password, user.Party, user.Id)
+	_, err := s.db.Exec(q, user.Name, user.Email, user.Party, user.Id)
 	if err != nil {
 		return err
 	}
