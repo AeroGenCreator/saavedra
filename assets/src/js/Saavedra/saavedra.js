@@ -23,15 +23,21 @@ document.addEventListener('alpine:init', () => {
 document.addEventListener('alpine:init', () => {
   Alpine.data('homeComponent', () => ({
 
-    message: false,
+    authError: false,
 
-    async goEmployees() { this.message = await OnlyRedirect("/employee") },
-    async goUsers() { this.message = await OnlyRedirect("/users") },
+    async goEmployees() {
+      var res = await OnlyRedirect("/employee");
+      this.authError = res.authError
+    },
+    async goUsers() {
+      var res = await OnlyRedirect("/users");
+      this.authError = res.authError
+    },
 
     async goHome() { await GoHome() },
     async goBack() { await GoBack() },
     async logOut() { await LogOut() },
-    async close() { this.message = false },
+    async close() { this.authError = false },
 
   }))
 })
@@ -253,6 +259,7 @@ document.addEventListener('alpine:init', () => {
         const record = JSON.stringify(
           { "id": id, "name": this.name, "email": this.email, "password": checkPass, "party": this.party }
         )
+        debugger;
         await UpdateRecord("/users/record", "/users", {method: "PUT", body: record})
       } catch (error) {
         throw error
@@ -264,7 +271,8 @@ document.addEventListener('alpine:init', () => {
     async deleteRecord() {
       try {
         const record = JSON.stringify({ "id": id })
-        return this.invalid = await DeleteRecord("/users/record", "/users", {method: "DELETE", body: record})
+        const res = await DeleteRecord("/users/record", "/users", { method: "DELETE", body: record })
+        this.invalid = res.authError
       } catch (error) {
         throw error
       } finally {

@@ -116,11 +116,12 @@ async function GoNew(redirect) {
 
 async function OnlyRedirect(path) {
   try {
-    var object = { "message": false }
+    var object = { authError: false };
     const res = await SecureFetching("/home", { method: "HEAD" })
     if (!res.ok) {
       if (res.status === 401) {
         window.alert("Usuario no autorizado / Unauthorized user.")
+        return object
       } else {
         throw new Error(res.status)
       }
@@ -128,12 +129,14 @@ async function OnlyRedirect(path) {
     const direction = await SecureFetching(path, { method: "GET" })
     if (!direction.ok) {
       if (direction.status === 401) {
-        return object.message = true
+        object.authError = true
+        return object
       } else {
         throw new Error(direction.status)
       }
     }
     window.location.href = path
+    return object
   } catch (error) {
     throw error
   }
@@ -141,16 +144,18 @@ async function OnlyRedirect(path) {
 
 async function ReadRecord(id, redirect) {
   try {
-    var object = {"message": false}
+    var object = { authError: false };
     const res = await SecureFetching("/home", { method: "HEAD" })
     if (!res.ok) {
       if (res.status === 401) {
-        return object.message = true
+        object.authError = true;
+        return object
       } else {
         throw new Error(res.status)
       }
     }
     window.location.href = `${redirect}?id=${id}`
+    return object
   } catch (error) {
     throw error
   }
@@ -158,12 +163,12 @@ async function ReadRecord(id, redirect) {
 
 async function CreateRecord(path, redirect, options = {}) {
   try {
-    var status = {"authError": false}
+    var object = { authError: false };
     const res = await SecureFetching(path, options)
     if (!res.ok) {
       if (res.status === 401) {
-        status.authError = true
-        return status
+        object.authError = true;
+        return object
       } else if (res.status === 409) {
         const duplicated = await res.text()
         alert(duplicated)
@@ -173,6 +178,7 @@ async function CreateRecord(path, redirect, options = {}) {
       }
     }
     window.location.href = redirect
+    return object
   } catch (error) {
     throw error
   }
@@ -180,16 +186,18 @@ async function CreateRecord(path, redirect, options = {}) {
 
 async function UpdateRecord(path, redirect, options = {}) {
   try {
-    var object = {"message": false}
+    var object = {authError: false };
     const res = await SecureFetching(path, options)
     if (!res.ok) {
       if (res.status === 401) {
-        return object.message = true
+        object.authError = true;
+        return object
       } else {
         throw new Error(await res.text())
       }
     }
     window.location.href = redirect
+    return object
   } catch (error) {
     throw error
   }
@@ -197,16 +205,18 @@ async function UpdateRecord(path, redirect, options = {}) {
 
 async function DeleteRecord(path, redirect, options = {}) {
   try {
-    var object = {"message": false}
+    var object = {authError: false };
     const res = await SecureFetching(path, options)
     if (!res.ok) {
       if (res.status === 401) {
-        return object.message = true
+        object.authError = true;
+        return object
       } else {
         throw new Error(await res.text())
       }
     }
     window.location.href = redirect
+    return object
   } catch (error) {
     throw error
   }

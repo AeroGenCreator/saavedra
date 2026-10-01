@@ -389,7 +389,7 @@
                             <blockquote>ReadRecord(id <em>int</em> path <em>string</em>) - Redireccionar a la vista de un registro</blockquote>
                             <blockquote>UpdateRecord(path <em>string</em>, redirect <em>string</em> options <em>object</em>.) - Actualizar un registro</blockquote>
                             <blockquote>DeleteRecord(path <em>string</em>, redirect <em>string</em> options <em>object</em>.) - Eliminar un registro</blockquote>
-                            <blockquote>FetchDataFromResponse(path <em>string</em>) - Solicitar data a un enpoint GET</blockquote>
+                            <blockquote>FetchDataFromResponse(path <em>string</em> options <em>object</em>) - Solicitar data a un endpoint (Devuelve Objeto)</blockquote>
                         </div>
                         <pre><code>
                             async createRecord() {
@@ -412,7 +412,7 @@
                             },
 
                             async loadRecords() {
-                                const data = await FetchDataFromResponse(path)
+                                const data = await FetchDataFromResponse(path, options)
                             },
                         </code></pre>
                     </div>

@@ -119,7 +119,9 @@ document.addEventListener('alpine:init', () => {
     currency(str) {
       const float = ValidateFloatStringToFloat(str)
       if (isNaN(float)) { return '' }
-      return FormatterMXN.format(float)
+      const money = FormatterMXN.format(float);
+      if (money === '$0.00') { return ''}
+      return money
     },
 
     integers(str) {
@@ -144,6 +146,107 @@ document.addEventListener('alpine:init', () => {
           curp: this.curp
         })
         const res = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
+        this.authError = res.authError
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+  }))
+})
+
+document.addEventListener('alpine:init', () => {
+  Alpine.data("employeesRecordComponent", (id) => ({
+
+    loading: false,
+    authError: false,
+    emailError: false,
+    name: '',
+    hireDate: '',
+    dailyPayment: '',
+    phone: '',
+    email: '',
+    nss: '',
+    curp: '',
+
+    async init() { await this.loadRecord(id) },
+
+    async goHome() { await GoHome() },
+    async goBack() { await GoBack("/employee") },
+    async logOut() { await LogOut() },
+    async goEmployees() { await OnlyRedirect("/employee") },
+
+    close() { this.authError = false; this.emailError = false; },
+    required() {
+      return (this.name === '' || this.hireDate === '' || this.dailyPayment === '' || this.loading)
+    },
+
+    async loadRecord(id) {
+      try {
+        this.loading = true
+        const data = await FetchDataFromResponse(
+          "/employee/record", { method: "POST", body: JSON.stringify({ id: id }) }
+        )
+        this.name = data.name
+        this.hireDate = data.hireDate
+        this.dailyPayment = FormatterMXN.format(data.dailyPayment)
+        this.phone = String(data.phone)
+        this.email = data.email
+        this.nss = data.nss
+        this.curp = data.curp
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    currency(str) {
+      const float = ValidateFloatStringToFloat(str)
+      if (isNaN(float)) { return '' }
+      const money = FormatterMXN.format(float);
+      if (money === '$0.00') { return ''}
+      return money
+    },
+
+    integers(str) {
+      const integer = ValidateIntegerStringToInteger(str)
+      if (isNaN(integer)) { return '' }
+      return String(integer)
+    },
+
+    async updateRecord() {
+      try {
+        this.loading = true
+        if (!ValidateEmail(this.email)) { this.emailError = true; return }
+        const payment = ValidateFloatStringToFloat(this.dailyPayment)
+        const number = ValidateIntegerStringToInteger(this.phone)
+        var values = JSON.stringify({
+          id: id,
+          name: this.name,
+          hireDate: this.hireDate,
+          dailyPayment: payment,
+          phone: number,
+          email: this.email,
+          nss: this.nss,
+          curp: this.curp
+        })
+        const res = await UpdateRecord("/employee/record", "/employee", { method: "PUT", body: values })
+        this.authError = res.authError
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async deleteRecord() {
+      try {
+        this.loading = true
+        const values = JSON.stringify({id: id})
+        const res = await DeleteRecord("/employee/record", "/employee", { method: "DELETE", body: values })
         this.authError = res.authError
       } catch (error) {
         throw error
