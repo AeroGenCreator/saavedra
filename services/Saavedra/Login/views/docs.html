@@ -84,6 +84,8 @@
                                 <a href="#component"><li>Alpine Componente</li></a>
                                 <a href="#nav-js"><li>Navegación</li></a>
                                 <a href="#crud"><li>CRUD</li></a>
+                                <a href="#numbers"><li>( Int Float ) Currency</li></a>
+                                <a href="#email-validate"><li>Emails</li></a>
                             </ul>
                         </ul>
                         <div class="buttons">
@@ -370,28 +372,40 @@
                             <blockquote>GoHome( ) | Redirecciona a "/home"</blockquote>
                             <blockquote>GoBack( path <em>string</em> ) | Redirecciona a "path"</blockquote>
                             <blockquote>LogOut( ) | Redirecciona a "/"</blockquote>
-                            <blockquote>OnlyRedirect( path <em>string</em> ) | Redirecciona a "path"</blockquote>
+                            <blockquote>
+                                OnlyRedirect( path <em>string</em> ) <em>object</em> | Redirecciona a "path".
+                                También devuelve un object con el atributo <strong>authError</strong> <em>bool</em>.
+                                Trabaja en conjunto con <a href="#add-permissions">AddPermissions</a>.
+                            </blockquote>
                         </div>
                         <pre><code>
                             async goHome() { await GoHome() },
                             async goBack() { await GoBack(path) },
                             async logOut() { await LogOut() },
-                            async go...() { await OnlyRedirect(path) },
+                            async go...() {
+                                const res = await OnlyRedirect(path)
+                                this.authError = res.authError
+                            },
                         </code></pre>
                     </div>
 
                     <div class="block" id="crud">
-                        <p class="subtitle is-6">
+                        <p class="subtitle is-5">
                             CRUD ( ReadRecord, CreateRecord, UpdateRecord, DeleteRecord, FetchDataFromResponse )
                         </p>
-                        <div class="content is-size-6">
-                            <blockquote>CreateRecord(path <em>string</em>, redirect <em>string</em> options <em>object</em>.) - Crear un registro</blockquote>
-                            <blockquote>ReadRecord(id <em>int</em> path <em>string</em>) - Redireccionar a la vista de un registro</blockquote>
-                            <blockquote>UpdateRecord(path <em>string</em>, redirect <em>string</em> options <em>object</em>.) - Actualizar un registro</blockquote>
-                            <blockquote>DeleteRecord(path <em>string</em>, redirect <em>string</em> options <em>object</em>.) - Eliminar un registro</blockquote>
-                            <blockquote>FetchDataFromResponse(path <em>string</em> options <em>object</em>) - Solicitar data a un endpoint (Devuelve Objeto)</blockquote>
-                        </div>
+                        <p>
+                            Todas las funciones <strong>CRUD</strong> devuelven un <em>object</em> con el atributo
+                            <strong>authError</strong> <em>bool</em>.
+                            Trabaja en conjunto con <a href="#add-permissions">AddPermissions</a>.
+                        </p>
+                        <p>
+                            Si el servicio es asegurado a nivel 4 para todos los endpoints GET
+                            <em>( /home, /list, /new, /record, /cualquier otra... )</em>
+                            entonces no es necesario guardar la respuesta <em>const res = await CRUD </em> y se puede
+                            llamar a las funciones con la siguiente sintaxis.
+                        </p>
                         <pre><code>
+                            // Cuando todo el servicio es nivel 4.
                             async createRecord() {
                             const record = { }
                             await CreateRecord(path, redirect, {method: "POST", body: JSON.stringify(record)})
@@ -414,6 +428,78 @@
                             async loadRecords() {
                                 const data = await FetchDataFromResponse(path, options)
                             },
+                        </code></pre>
+                        <div class="content is-size-6">
+                            <blockquote>CreateRecord( path <em>string</em>, redirect <em>string</em> options <em>object</em> ) <em>object</em> - Crear un registro.</blockquote>
+                            <blockquote>ReadRecord( id <em>int</em> path <em>string</em>) <em>object</em> - Redireccionar a la vista de un registro.</blockquote>
+                            <blockquote>UpdateRecord( path <em>string</em>, redirect <em>string</em> options <em>object</em> ) <em>object</em> - Actualizar un registro.</blockquote>
+                            <blockquote>DeleteRecord( path <em>string</em>, redirect <em>string</em> options <em>object</em> ) <em>object</em> - Eliminar un registro.</blockquote>
+                            <blockquote>FetchDataFromResponse( path <em>string</em> options <em>object</em> ) <em>object</em> - Solicitar data a un endpoint.</blockquote>
+                        </div>
+                        <p>
+                            Si se desea manejar niveles de acuero al permiso de usuario, debe esperarse el objeto
+                            con la validación de autorización.
+                        </p>
+                        <p class="has-text-danger">
+                            Notar que la funcion <strong>FetchDataFromResponse</strong>
+                            no devuelve el objeto <em>( object.authError )</em>, en su lugar
+                            devuelve un objeto de <strong>data</strong> desde el backend.
+                        </p>
+                        <pre><code>
+                            // Manejando solicitudes segun niveles de permisos.
+                            async createRecord() {
+                                const record = { }
+                                const res = await CreateRecord(path, redirect, {method: "POST", body: JSON.stringify(record)})
+                                this.authError = res.authError
+                            },
+
+                            async loadRecords() {
+                                const data = await FetchDataFromResponse(path, options)
+                                this.records = data.records
+                                this.hasNextPage = data.hasNextPage
+                                ...
+                            },
+                        </code></pre>
+                    </div>
+                    <div class="block" id="numbers">
+                        <p class="subtitle is-5">
+                            Integer - Float - MXN Currency
+                        </p>
+                        <div class="content is-size-6">
+                            <blockquote>
+                                ValidateIntegerStringToInteger( str <em>string</em> ) <em>float</em>
+                                - Mantiene unicamente caracteres númericos, y <strong>cast</strong> a integer.
+                            </blockquote>
+                            <blockquote>
+                                ValidateFloatStringToFloat( str <em>string</em> ) <em>integer</em>
+                                - Mantiene unicamente caracteres númericos, y <strong>cast</strong> a float.
+                            </blockquote>
+                            <blockquote>
+                                FormatterMXN.format( value <em>float</em> ) <em>string</em>
+                                - Da formato de moneda $0.00.
+                            </blockquote>
+                        </div>
+                        <pre><code>
+                            const number = ValidateIntegerStringToInteger(this.quantity)
+
+                            const payment = ValidateFloatStringToFloat(this.dailyPayment)
+
+                            currency(str) {
+                              const float = ValidateFloatStringToFloat(str)
+                              if (isNaN(float)) { return '' }
+                              const money = FormatterMXN.format(float);
+                              if (money === '$0.00') { return ''}
+                              return money
+                            },
+                        </code></pre>
+                    </div>
+                    <div class="block" id="email-validate">
+                        <p class="subtitle is-5">ValidateEmail</p>
+                        <div class="content is-size-6">
+                            <blockquote>ValidateEmail( str <em>string</em> ) <em>bool</em></blockquote>
+                        </div>
+                        <pre><code>
+                            if (!ValidateEmail(this.email)) { this.emailError = true; return }
                         </code></pre>
                     </div>
                 </div>
