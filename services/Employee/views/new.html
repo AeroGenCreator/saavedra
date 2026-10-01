@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/assets/css/saavedra/saavedra.css">
     <script src="https://kit.fontawesome.com/75d1a8fea1.js" crossorigin="anonymous"></script>
     <script defer src="/assets/src/utils/utils.js"></script>
-    <!-- Fichero JS para manejar estados de Alpine. Recomiendo un fichero por servicio. -->
     <script defer src="/assets/src/js/Employee/employee.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.17.3/dist/cdn.min.js"></script>
     <title></title>
@@ -61,16 +60,24 @@
             </div>
         </div>
         <div class="columns">
-            <div class="column is-12" x-show="message">
+            <div class="column is-12" x-show="authError">
                 <div class="notification is-danger is-light">
                     <button class="delete" @click="close"></button>
                     <p class="has-text-left is-size-7">
                         <span class="icon-text">
                             <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                            <span>
-                                Falla en la validación de contraseña o de correo electrónico;
-                                revisar información y reintentar el envío del formulario.
-                            </span>
+                            <span>Tu usuario no tiene permisos para realizar la acción</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="column is-12" x-show="emailError">
+                <div class="notification is-danger is-light">
+                    <button class="delete" @click="close"></button>
+                    <p class="has-text-left is-size-7">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                            <span>Falla en la validación de correo electrónico; revisar información y reintentar.</span>
                         </span>
                     </p>
                 </div>
@@ -112,7 +119,7 @@
                         type="tel"
                         placeholder="type number"
                         x-model="phone"
-                        @blur="phone = numbers($event.target.value)"
+                        @blur="phone = integers($event.target.value)"
                     />
                     <span class="icon is-small is-left"><i class="fa-solid fa-phone"></i></span>
                 </div>

@@ -188,28 +188,52 @@ document.addEventListener('alpine:init', () => {
             </div>
         </div>
         <div class="columns">
-            <div class="column is-12" x-show="message">
+            <div class="column is-12" x-show="authError">
                 <div class="notification is-danger is-light">
                     <button class="delete" @click="close"></button>
                     <p class="has-text-left is-size-7">
                         <span class="icon-text">
                             <span class="icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
-                            <span>
-                                Falla en la validación de contraseña o de correo electrónico;
-                                revisar información y reintentar el envío del formulario.
-                            </span>
+                            <span>...</span>
                         </span>
                     </p>
                 </div>
             </div>
         </div>
-
         <div class="columns">
             <!-- INPUT -->
             <div class="column is-4">
                 <label class="label is-small">...</label>
                 <div class="control has-icons-left">
                     <input class="input is-small" type="" placeholder="" x-model=""/>
+                    <span class="icon is-small is-left"><!-- ICON --></span>
+                </div>
+            </div>
+            <!--CAMPO MONEDA O FLOAT -->
+            <div class="column is-4">
+                <label class="label is-small">...</label>
+                <div class="control has-icons-left">
+                    <input 
+                        class="input is-small"
+                        type="text"
+                        placeholder=""
+                        x-model="var"
+                        @blur="var = currency($event.target.value)"
+                    />
+                    <span class="icon is-small is-left"><!-- ICON --></span>
+                </div>
+            </div>
+            <!-- CAMPO INTEGER -->
+            <div class="column is-4">
+                <label class="label is-small">...</label>
+                <div class="control has-icons-left">
+                    <input
+                        class="input is-small"
+                        type=""
+                        placeholder=""
+                        x-model="var"
+                        @blur="var = integer($event.target.value)"
+                    />
                     <span class="icon is-small is-left"><!-- ICON --></span>
                 </div>
             </div>
@@ -231,4 +255,66 @@ document.addEventListener('alpine:init', () => {
     </div>
 </section>
 </main>
+```
+
+```js
+// COMPONENTE PARA VISTA CREACION REGISTRO FORMULARIO
+document.addEventListener('alpine:init', () => {
+  Alpine.data("employeesNewComponent", () => ({
+
+    authError: false,
+    emailError: false,
+    var: '',
+    loading: false,
+
+    async init() { await this.loadMany2One() },
+
+    async goHome() { await GoHome() },
+    async goBack() { await GoBack("/employee") },
+    async logOut() { await LogOut() },
+    async goEmployees() { await OnlyRedirect("/employee") },
+    close() { this.authError = false; this.emailError = false },
+
+    required() {
+      return (this.loading)
+    },
+
+    currency(str) {
+      const float = ValidateFloatStringToFloat(str)
+      if (isNaN(float)) { return '' }
+      return FormatterMXN.format(float)
+    },
+
+    integers(str) {
+      const integer = ValidateIntegerStringToInteger(str)
+      if (isNaN(integer)) { return '' }
+      return String(integer)
+    },
+
+    async loadMany2One() {
+      try {
+        this.loading = true
+        const data = await FetchDataFromResponse("")
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async createRecord() {
+      try {
+        this.loading = true
+        var values = JSON.stringify({field: this.var})
+        const res = await CreateRecord("", "", { method: "POST", body: values })
+        this.authError = res.authError
+      } catch (error) {
+        throw error
+      } finally {
+        this.loading = false
+      }
+    },
+
+  }))
+})
 ```

@@ -95,7 +95,8 @@ document.addEventListener('alpine:init', () => {
 document.addEventListener('alpine:init', () => {
   Alpine.data("employeesNewComponent", () => ({
 
-    message: false,
+    authError: false,
+    emailError: false,
     name: '',
     hireDate: '',
     dailyPayment: '',
@@ -109,9 +110,10 @@ document.addEventListener('alpine:init', () => {
     async goBack() { await GoBack("/employee") },
     async logOut() { await LogOut() },
     async goEmployees() { await OnlyRedirect("/employee") },
+    close() { this.authError = false; this.emailError = false },
 
     required() {
-      return (this.name === '' || this.hireDate === '' || this.dailyPayment === '', this.loading)
+      return (this.name === '' || this.hireDate === '' || this.dailyPayment === '' || this.loading)
     },
 
     currency(str) {
@@ -120,7 +122,7 @@ document.addEventListener('alpine:init', () => {
       return FormatterMXN.format(float)
     },
 
-    numbers(str) {
+    integers(str) {
       const integer = ValidateIntegerStringToInteger(str)
       if (isNaN(integer)) { return '' }
       return String(integer)
@@ -129,6 +131,7 @@ document.addEventListener('alpine:init', () => {
     async createRecord() {
       try {
         this.loading = true
+        if (!ValidateEmail(this.email)) { this.emailError = true; return }
         const payment = ValidateFloatStringToFloat(this.dailyPayment)
         const number = ValidateIntegerStringToInteger(this.phone)
         var values = JSON.stringify({
@@ -141,9 +144,11 @@ document.addEventListener('alpine:init', () => {
           curp: this.curp
         })
         const res = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
-        this.message = res.authError
+        this.authError = res.authError
       } catch (error) {
         throw error
+      } finally {
+        this.loading = false
       }
     },
 

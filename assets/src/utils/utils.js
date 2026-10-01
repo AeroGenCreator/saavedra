@@ -2,6 +2,32 @@
 let refreshSubscribers = [];
 let isRefreshing = false;
 
+// === CONSTANTES GLOBALES ===
+
+const FormatterMXN = new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+});
+
+// === Funciones Simples ===
+
+function ValidateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+function ValidateFloatStringToFloat(str) {
+  if (!str) return 0.0;
+  const regex = /[^0-9.-]+/g;
+  return parseFloat(str.replace(regex, ""))
+}
+
+function ValidateIntegerStringToInteger(str) {
+  if (!str) return 0;
+  const float = ValidateFloatStringToFloat(str)
+  return Math.trunc(float)
+}
+
 function onTokenRefreshed() {
   // Si existen peticiones en cola, se ejecutn
   refreshSubscribers.forEach((callback) => callback());
@@ -225,28 +251,4 @@ async function LogOut() {
   } catch (error) {
     console.error('No fue posible cerrar sesión:', error)
   }
-}
-
-// === Funciones Simples ===
-
-function ValidateEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-const FormatterMXN = new Intl.NumberFormat('es-MX', {
-  style: 'currency',
-  currency: 'MXN',
-});
-
-function ValidateFloatStringToFloat(str) {
-  if (!str) return 0.0;
-  const regex = /[^0-9.-]+/g;
-  return parseFloat(str.replace(regex, ""))
-}
-
-function ValidateIntegerStringToInteger(str) {
-  if (!str) return 0;
-  const float = ValidateFloatStringToFloat(str)
-  return Math.trunc(float)
 }
