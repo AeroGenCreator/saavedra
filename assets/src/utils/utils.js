@@ -25,7 +25,6 @@ async function SecureFetching(route, requestContent = {}, customHeaders = {'X-Re
   try {
     let response = await fetch(route, options);
     if (response.status === 401) {
-
       if (isRefreshing) {
         return new Promise((resolve) => {
           refreshSubscribers.push(async () => {
@@ -36,7 +35,7 @@ async function SecureFetching(route, requestContent = {}, customHeaders = {'X-Re
 
       isRefreshing = true;
       console.log("Attempting refresh...")
-      const refreshResponse = await fetch("/session", {method: "POST", credentials: 'include'});
+      const refreshResponse = await fetch("/session", { method: "POST", credentials: 'include' });
       isRefreshing = false;
 
       if (refreshResponse.ok) {
@@ -140,7 +139,7 @@ async function CreateRecord(path, redirect, options = {}) {
         status.authError = true
         return status
       } else if (res.status === 409) {
-        const duplicated = await response.text()
+        const duplicated = await res.text()
         alert(duplicated)
         return
       } else {
@@ -240,12 +239,14 @@ const FormatterMXN = new Intl.NumberFormat('es-MX', {
   currency: 'MXN',
 });
 
-function ValidateFloatStringToFloat(string) {
-  const regex = /[^\d.]\,/g;
-  return parseFloat(string.replaceAll(regex, ""))
+function ValidateFloatStringToFloat(str) {
+  if (!str) return 0.0;
+  const regex = /[^0-9.-]+/g;
+  return parseFloat(str.replace(regex, ""))
 }
 
-function ValidateIntegerStringToInteger(string) {
-  const regex = /[^\d]/g;
-  return parseFloat(string.replaceAll(regex, ""))
+function ValidateIntegerStringToInteger(str) {
+  if (!str) return 0;
+  const float = ValidateFloatStringToFloat(str)
+  return Math.trunc(float)
 }

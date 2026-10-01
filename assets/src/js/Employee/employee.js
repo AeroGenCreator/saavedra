@@ -140,8 +140,8 @@ document.addEventListener('alpine:init', () => {
           nss: this.nss,
           curp: this.curp
         })
-        const authError = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
-        this.message = authError
+        const res = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
+        this.message = res.authError
       } catch (error) {
         throw error
       }
