@@ -7,6 +7,7 @@ document.addEventListener('alpine:init', () => {
     unlock() { return (this.email === '' || this.password === '') },
     close(){this.status = false},
     goDocs() { window.location.href = "/docs" },
+    goObtain() { window.location.href =  "/obtain" },
     goPhil() { window.location.href = "/philosophy" },
     goTutorial() { window.location.href = "/tutorial" },
 

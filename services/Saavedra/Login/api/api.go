@@ -71,17 +71,37 @@ func (e EndpointHandler) CallRoot(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// ROUTE: "/philosophy"
-func (e EndpointHandler) CallPhilosophy(w http.ResponseWriter, r *http.Request) {
+// ROUTE: "/obtain"
+func (e EndpointHandler) CallObtain(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		tpl, err := template.ParseFiles("services/Saavedra/Login/views/philosophy.html")
+		tpl, err := template.ParseFiles("services/Saavedra/Login/views/obtain.html")
 		if err != nil {
 			log.Printf("Error parsing (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		if err := tpl.Execute(w, map[string]string{"Title": "Filosofía"}); err != nil {
+		if err := tpl.Execute(w, map[string]string{"Title": "Obtener Saavedra"}); err != nil {
+			log.Printf("Error rendering (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	default:
+		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+	}
+}
+
+// ROUTE: "/tutorial"
+func (e EndpointHandler) CallTutorial(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		tpl, err := template.ParseFiles("services/Saavedra/Login/views/tutorial.html")
+		if err != nil {
+			log.Printf("Error parsing (%v)", err.Error())
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		if err := tpl.Execute(w, map[string]string{"Title": "Tutorial"}); err != nil {
 			log.Printf("Error rendering (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -111,17 +131,17 @@ func (e EndpointHandler) CallDocs(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// ROUTE: "/tutorial"
-func (e EndpointHandler) CallTutorial(w http.ResponseWriter, r *http.Request) {
+// ROUTE: "/philosophy"
+func (e EndpointHandler) CallPhilosophy(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		tpl, err := template.ParseFiles("services/Saavedra/Login/views/tutorial.html")
+		tpl, err := template.ParseFiles("services/Saavedra/Login/views/philosophy.html")
 		if err != nil {
 			log.Printf("Error parsing (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		if err := tpl.Execute(w, map[string]string{"Title": "Tutorial"}); err != nil {
+		if err := tpl.Execute(w, map[string]string{"Title": "Filosofía"}); err != nil {
 			log.Printf("Error rendering (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

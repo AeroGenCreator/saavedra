@@ -117,9 +117,10 @@
                     <div class="block" id="auth-middle-ware">
                         <p class="subtitle is-5">Función ( AuthMiddleware )</p>
                         <div class="content is-size-6">
-                            <p>
-                                Protección de rutas. Además extrae información de usuario desde la petición.
-                            </p>
+                            <div class="notification is-danger is-light has-text-black">
+                                Protección de rutas.
+                                Además esta función permite la extracción de información de usuario desde la petición.
+                            </div>
                             <blockquote>AuthMiddleware( next <em>http.Handler</em> )</blockquote>
                         <pre><code>
                             mux.Handle("/users", utils.AuthMiddleware(http.HandlerFunc(handler.CallUsers)))

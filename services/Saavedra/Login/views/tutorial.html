@@ -34,10 +34,19 @@
     <div class="notification is-dark">
         <div class="block has-text-white has-text-left">
             <h1 class="title is-1">Saavedra Tutorial</h1>
-            <p>Antes de comenzar es importante obtener <a href="">Saavedra</a> ( .zip ).</p>
+            <p>Antes de comenzar es importante obtener <a href="/obtain" target="_blank" class="has-text-info">Saavedra</a> ( .zip ).</p>
             <p>
                 Este tutorial guía paso a paso en la creación de un CRUD desde cero con herramientas de Saavedra.
                 Asimismo, detalla la distribución de capas y la jerarquía de directorios dentro de la arquitectura.
+            </p>
+            <p>
+                Para familiarisarse con ( GO ) y la arquitectura del ( Repository Pattern ) recomiendo el tutorial de
+                <a href="https://www.youtube.com/watch?v=ID9NZ88JeOE&t=3387s" target="_blank" class="has-text-info">
+                    <span class="icon-text">
+                        <span class="icon"><i class="fa-brands fa-youtube"></i></span>
+                        <span>Cesar Jimenez</span>
+                    </span>
+                </a>
             </p>
         </div>
     </div>
@@ -573,7 +582,7 @@
                         <p class="subtitle is-5">Endpoints</p>
                         <p>
                             Además de los endpoints esta capa administra permisos de usuario
-                            ( <a href="/docs#add-permissions" target="_new">AddPermissions</a> ).
+                            ( <a href="/docs#add-permissions" target="_blank">AddPermissions</a> ).
                         </p>
                         <div class="content is-size-6"><blockquote><em>/services/Employee/api/api.go</em></blockquote></div>
                         <pre><code>
@@ -848,7 +857,7 @@
                         <p class="subtitle is-5">Router</p>
                         <p>
                             Creando rutas se recomienda agregar la proteccion JWT usando
-                            ( <a href="/docs#auth-middle-ware">AuthMiddleWare</a> ).
+                            ( <a href="/docs#auth-middle-ware" target="_blank">AuthMiddleWare</a> ).
                         </p>
                         <div class="content is-size-6"><blockquote><em>/services/Employee/router/router.go</em></blockquote></div>
                         <div class="notification is-danger is-light has-text-black">
@@ -908,14 +917,14 @@
                         </span>
                     </div>
                     <div class="notification is-dark is-light has-text-white">
-                        Para toda plantilla se requiere la <a href="/docs#navbar" target="_new">Barra de Navegación</a>,
-                        el header de importación de <a href="/docs#depends" target="_new">Dependencias</a>
-                        y la conexión entre el HTML y el componente de Alpine.js (<a href="/docs#component" target="_new">Iniciar Componente</a>).
+                        Para toda plantilla se requiere la <a href="/docs#navbar" target="_blank">Barra de Navegación</a>,
+                        el header de importación de <a href="/docs#depends" target="_blank">Dependencias</a>
+                        y la conexión entre el HTML y el componente de Alpine.js (<a href="/docs#component" target="_blank">Iniciar Componente</a>).
                         Este último paso debe repetirse en cada nueva plantilla HTML.
                     </div>
                     <div class="block" id="register-menu">
                         <p class="subtitle is-5">Menu</p>
-                        <p>Para obtener la plantilla de ( menuitem ) copiar desde ( <a href="/docs#menu" target="_new">Menuitem</a> ).</p>
+                        <p>Para obtener la plantilla de ( menuitem ) copiar desde ( <a href="/docs#menu" target="_blank">Menuitem</a> ).</p>
                         <div class="content is-size-6">
                             <blockquote>Colocar en <em>/services/Saavedra/Home/views/html.home</em></blockquote>
                         </div>
@@ -924,7 +933,7 @@
                         <p class="subtitle is-5">Abrir Servicio</p>
                         <p>Relacionar la acción del ( menuitem ) con la dirección del servicio.</p>
                         <p>Dependiendo del servicio se puede redirigir a un ( submenu ) o a la vista lista.</p>
-                        <p>Basta con usar la función ( <a href="/docs#nav-js">OnlyRedirect</a> ) para este proposito.</p>
+                        <p>Basta con usar la función ( <a href="/docs#nav-js" target="_blank">OnlyRedirect</a> ) para este proposito.</p>
                         <div class="content is-size-6">
                             <blockquote><em>/assets/src/js/Saavedra/saavedra.js</em> <strong>"homeComponent"</strong>.</blockquote>
                         </div>
