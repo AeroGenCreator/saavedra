@@ -30,930 +30,932 @@
 <main>
 
 <div class="container">
-
-    <section id="comments-tutorial" class="section px-0">
-        <div class="notification is-dark">
-            <div class="block has-text-white has-text-left">
-                <h1 class="title is-1">Saavedra Tutorial</h1>
-                <p>
-                    Antes de comenzar a desarrolla es importante <a href="">obtener Saavedra</a>.
-                </p>
-                <p>
-                    El tutorial enseña la contrucción de un CRUD desde cero utilizando herramientas de Saavedra.
-                    Asi mismo es importante mencionar que se vera la distribución de capas y jerarquia de directorios
-                    dentro de Saavedra.
-                </p>
-            </div>
+<section id="comments-tutorial" class="section px-0">
+    <div class="notification is-dark">
+        <div class="block has-text-white has-text-left">
+            <h1 class="title is-1">Saavedra Tutorial</h1>
+            <p>Antes de comenzar es importante obtener <a href="">Saavedra</a> ( .zip ).</p>
+            <p>
+                Este tutorial guía paso a paso en la creación de un CRUD desde cero con herramientas de Saavedra.
+                Asimismo, detalla la distribución de capas y la jerarquía de directorios dentro de la arquitectura.
+            </p>
         </div>
-    </section>
-
-    <section id="columns-tutorial">
-        <div class="columns">
-            <div class="column is-one-fifth">
-                <div class="box stick">
-                    <div class="block">
-                        <div class="title is-3 has-text-centered">
-                            <span class="icon-text">
-                                <span class="icon"><i class="fa-solid fa-tree"></i></span>
-                                <span>Índice</span>
-                            </span>
-                        </div>
+    </div>
+</section>
+<section id="columns-tutorial">
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <div class="box stick">
+                <div class="block">
+                    <div class="title is-3 has-text-centered">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-tree"></i></span>
+                            <span>Índice</span>
+                        </span>
                     </div>
-                    <div class="content is-size-7">
-                        <ul class="py-6">
-                            <a href="#jerarquia-tutorial"><li>Proyecto</li></a>
-                            <ul>
-                                <a href="#rutas"><li>Rutas</li></a>
-                                <a href="#service"><li>Servicio</li></a>
-                            </ul>
-                            <a href="#backend-tutorial"><li>Backend</li></a>
-                            <ul>
-                                <a href="#types"><li>Tipado</li></a>
-                                <a href="#store"><li>Persistencia ( CRUD )</li></a>
-                                <a href="#logics"><li>Capa Lógica</li></a>
-                                <a href="#endpoint"><li>Endpoints</li></a>
-                                <a href="#router"><li>Router</li></a>
-                                <a href="#register"><li>Registro</li></a>
-                            </ul>
+                </div>
+                <div class="content is-size-7">
+                    <ul class="py-6">
+                        <a href="#jerarquia-tutorial"><li>Proyecto</li></a>
+                        <ul>
+                            <a href="#rutas"><li>Rutas</li></a>
+                            <a href="#service"><li>Servicio</li></a>
                         </ul>
-                        <div class="buttons">
-                            <button
-                                class="button is-fullwidth is-dark"
-                                x-data="{ up(){window.location.href='#comments-tutorial'} }"
-                                @click="up">
-                                <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
-                                <span>Subir</span>
-                            </button>
-                            <button
-                                class="button is-fullwidth is-dark"
-                                x-data="{ root(){window.location.href='/'} }"
-                                @click="root">
-                                <span class="icon"><i class="fa-solid fa-house"></i></span>
-                                <span>Inicio</span>
-                            </button>
-                        </div>
+                        <a href="#backend-tutorial"><li>Backend</li></a>
+                        <ul>
+                            <a href="#tables"><li>Tablas</li></a>
+                            <a href="#types"><li>Tipado</li></a>
+                            <a href="#store"><li>( CRUD )</li></a>
+                            <a href="#logics"><li>Capa Lógica</li></a>
+                            <a href="#endpoint"><li>Endpoints</li></a>
+                            <a href="#router"><li>Router</li></a>
+                            <a href="#register"><li>Registro</li></a>
+                        </ul>
+                        <a href="#frontend-tutorial"><li>Frontend</li></a>
+                        <ul>
+                            <a href="#register-menu"><li>Menu</li></a>
+                            <a href="#redirect-service"><li>Abrir Servicio</li></a>
+                            <a href="#list-view"><li>Vista Lista</li></a>
+                            <a href="#new-view"><li>Vista Nuevo</li></a>
+                            <a href="#record-view"><li>Vista Record</li></a>
+                            <a href="#component"><li>Componentes ( Alpine.js )</li></a>
+                        </ul>
+                    </ul>
+                    <div class="buttons">
+                        <button
+                            class="button is-fullwidth is-dark"
+                            x-data="{ up(){window.location.href='#comments-tutorial'} }"
+                            @click="up">
+                            <span class="icon"><i class="fa-solid fa-circle-up"></i></span>
+                            <span>Subir</span>
+                        </button>
+                        <button
+                            class="button is-fullwidth is-dark"
+                            x-data="{ root(){window.location.href='/'} }"
+                            @click="root">
+                            <span class="icon"><i class="fa-solid fa-house"></i></span>
+                            <span>Inicio</span>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="column is-four-fifths">
-                <div class="box">
-
-                    <section id="jerarquia-tutorial" class="section">
-
-                        <div class="subtitle is-3">
-                            <span class="icon-text">
-                                <span class="icon"><i class="fa-solid fa-sitemap"></i></span>
-                                <span id="backend">Proyecto</span>
-                            </span>
+        </div>
+        <div class="column is-four-fifths">
+            <div class="box">
+                <section id="jerarquia-tutorial" class="section">
+                    <div class="subtitle is-3">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-sitemap"></i></span>
+                            <span id="backend">Proyecto</span>
+                        </span>
+                    </div>
+                    <div class="notification is-danger is-light has-text-black">
+                        Este tutorial aborda la construcción del servicio Empleados.
+                        Como ya existe en la base de Saavedra, es necesario eliminarlo antes de comenzar.
+                    </div>
+                    <div class="notification is-warning is-light has-text-black">
+                        Asegúrate de borrar el directorio <em>/services/Employee</em>,
+                        su directorio controlador <em>/assets/src/js/Employee</em>,
+                        el bloque de menú en <em>/services/Saavedra/Home/views/home.html</em>
+                        y su respectiva redirección en el componente <strong>"homeComponent"</strong>
+                        (<em>/assets/src/Saavedra/saavedra.js</em>).
+                    </div>
+                    <div class="block" id="rutas">
+                        <p class="subtitle is-5">Rutas</p>
+                        <div class="notification is-info is-light has-text-black"><ul>
+                            <li><strong>Directorio assets: </strong>
+                                Es servido por Saavedra y habilita la importación de componentes JavaScript.</li>
+                            <li><strong>Nuevos servicios: </strong>
+                                Cada incorporación requiere añadir un menuitem en home.html y definir su acción en saavedra.js.</li>
+                        </ul></div>
+                        <div class="content">
+                            <blockquote><em>/assets/src/js/Saavedra/saavedra.js</em></blockquote>
+                            <blockquote><em>/services/Saavedra/Home/views/home.html</em></blockquote>
                         </div>
-
-                        <div class="notification is-danger is-light">
-                            <div class="block has-text-black has-text-left">
-                                <p>
-                                    Este tutorial construye el servicio <em>Empleados</em>
-                                    el cual ya existe en Saavedra base por tanto se
-                                    recomienda eliminar el servicio para poder contruirlo desde cero.
-                                    Basta con eliminar el directorio <em>/services/Employee</em>
-                                    asi como su controlador ( JS ) en <em>/assets/src/js/Employee</em>.
-                                </p>
-                                <p>
-                                    Así mismo se puede eliminar su item menu en <em>/services/Saavedra/Home/views/home.html</em>
-                                    y la redirección del mismo en <em>/assets/src/Saavedra/saavedra.js</em> componente
-                                    <em>homeComponent</em>.
-                                </p>
-                            </div>
+                        <pre><code>
+                            └── saavedra/
+                                ├── assets/
+                                │   ├── css/
+                                │   ├── icon/
+                                │   ├── img/
+                                │   └── src/
+                                │       ├── js/
+                                │       │   ├── Saavedra/
+                                │       │   └── servicios...
+                                │       └── utils/
+                                ├── config/
+                                ├── db/
+                                ├── docker/
+                                ├── services/
+                                │   ├── Saavedra/
+                                │   │   ├── Home
+                                │   │   └── ...
+                                │   └── servicios...
+                                ├── utils/
+                                ├── .env
+                                └── main.go
+                        </code></pre>
+                    </div>
+                    <div class="block" id="service">
+                        <p class="subtitle is-5">Servicio</p>
+                        <div class="notification is-info is-light has-text-black">
+                            A diferencia de un módulo, un servicio está diseñado para resolver una tarea de negocio muy concreta,
+                            reduciéndola a su mínima expresión. A continuación, se detalla la estructura jerárquica de un servicio:
                         </div>
-
-                        <div class="block" id="rutas">
-                            <p class="subtitle is-5">Rutas</p>
-                            <div class="content is-size-6">
-                                <p>
-                                    El directorio <strong>assets</strong> es servido por Saavedra.
-                                    Permite la importación de componentes ( JS ).
-                                </p>
-                                <p>
-                                    Cada nuevo servicio requiere de agregar un
-                                    <strong>( menuitem )</strong>
-                                    en <strong>( home.html)</strong>
-                                    y su accion en <strong>( saavedra.js )</strong>.
-                                </p>
-                                <blockquote>
-                                    <em>/assets/src/js/Saavedra/saavedra.js</em>
-                                </blockquote>
-                                <blockquote>
-                                    <em>/services/Saavedra/Home/views/home.html</em>
-                                </blockquote>
-                            <pre><code>
-                                └── saavedra/
-                                    ├── assets/
-                                    │   ├── css/
-                                    │   ├── icon/
-                                    │   ├── img/
-                                    │   └── src/
-                                    │       ├── js/
-                                    │       │   ├── Saavedra/
-                                    │       │   └── servicios...
-                                    │       └── utils/
-                                    ├── config/
-                                    ├── db/
-                                    ├── docker/
-                                    ├── services/
-                                    │   ├── Saavedra/
-                                    │   │   ├── Home
-                                    │   │   └── ...
-                                    │   └── servicios...
-                                    ├── utils/
-                                    ├── .env
-                                    └── main.go
-                            </code></pre>
+                        <pre><code>
+                            └── servicio(x)/
+                                ├── config/
+                                │   └── json, toml, yaml...
+                                ├── router/
+                                │   └── router.go
+                                ├── api/
+                                │   └── api.go
+                                ├── service/
+                                │   └── service.go
+                                ├── store/
+                                │   └── store.go
+                                ├── types/
+                                │   └── types.go
+                                ├── sql/
+                                │   └── sql.go
+                                ├── tests/
+                                │   └── test.sh
+                                └── views/
+                                    ├── menu.html
+                                    ├── list.html
+                                    ├── new.html
+                                    └── record.html
+                        </code></pre>
+                        <div class="content"><blockquote>
+                            <ol>
+                                <li>Sql (Creación de Tablas)</li>
+                                <li>Types ( Tipado Go )</li>
+                                <li>Store ( Queries )</li>
+                                <li>Service ( Lógica de Negocio )</li>
+                                <li>Api ( Handler )</li>
+                                <li>Router ( Rutas ) -> ( HTML - JS )</li>
+                            </ol>
+                        </blockquote></div>
+                        <div class="notification is-warning is-light has-text-black">
+                            El directorio <strong>config</strong> permite guardar data de configuración o volatil ( JSON, toml, yml )
                         </div>
-                        <div class="block" id="service">
-                            <p class="subtitle is-5">Servicio</p>
-                            <p>
-                                A diferencia de un modulo. Un servicio resuelve una actividad de negocio
-                                reduciendo a la minima expresión. <em>A continuación la jerarquia de un servicio</em>
-                            </p>
-                            <pre><code>
-                                └── servicio(x)/
-                                    ├── config/
-                                    │   └── json, toml, yaml...
-                                    ├── router/
-                                    │   └── router.go
-                                    ├── api/
-                                    │   └── api.go
-                                    ├── service/
-                                    │   └── service.go
-                                    ├── store/
-                                    │   └── store.go
-                                    ├── types/
-                                    │   └── types.go
-                                    ├── sql/
-                                    │   └── sql.go
-                                    ├── tests/
-                                    │   └── test.sh
-                                    └── views/
-                                        ├── menu.html
-                                        ├── list.html
-                                        ├── new.html
-                                        └── record.html
-                            </code></pre>
-                            <div class="content">
-                                <blockquote>
-                                    <strong>
-                                        Sql (Creación de Tablas) ->
-                                        Types ( Tipado Go ) ->
-                                        Store ( Queries ) ->
-                                        Service ( Logica de Negocio ) ->
-                                        Api ( handler ) ->
-                                        Router ( Rutas ) -> ( HTML - JS )
-                                    </strong>
-                                </blockquote>
-                            </div>
-                            <p>
-                                Config  <em>permite guardar data volatil o de configuración</em>.
-                                Html <em>plantillas</em>.
-                            </p>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL BACKEND -->
+                <section id="backend-tutorial" class="section">
+                    <div class="subtitle is-3">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-database"></i></span>
+                            <span id="backend">Backend</span>
+                        </span>
+                    </div>
+                    <div class="block" id="tables">
+                        <p class="subtitle is-5">Tablas</p>
+                        <div class="notification is-info is-light has-text-black">
+                            La construcción de tablas se realizan siguiendo una contrucción logica de respaldo.
+                            A continuación se muestra como se inicia además se recomienda mantener el mismo nombre
+                            para la función de creación. ( CreateSchema )
                         </div>
-                    </section>
-
-                    <section id="backend-tutorial" class="section">
-
-                        <div class="subtitle is-3">
-                            <span class="icon-text">
-                                <span class="icon"><i class="fa-solid fa-database"></i></span>
-                                <span id="backend">Backend</span>
-                            </span>
-                        </div>
-
-                        <div class="block" id="sql">
-                            <p class="subtitle is-5">SQL</p>
-                            <p>
-                                Contrucción de la tabla de empleados.
-                                Se sigue la siguiente sintaxis para reconstruir
-                                la tabla cada vez que se hagan cambios.
-                            </p>
-                            <div class="content is-size-6">
-                                <blockquote>Construir el fichero: <em>/services/Employee/sql/sql.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                                package sql
-
-                                import (
-                               	"database/sql"
-                               	"fmt"
-                               	"log"
-                                )
-                                func CreateSchema(db *sql.DB) error {
-                                   	// Comienzo de transacción SQL
-                                   	tx, err := db.Begin()
-                                   	if err != nil {
-                                  		return err
-                                   	}
-                                   	// Rollback de respaldo
-                                   	defer tx.Rollback()
-                                   	// Validar si la tabla ya existe
-                                   	var exists bool
-                                   	queryCheckEmployee := `SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='employee');`
-                                   	if err = tx.QueryRow(queryCheckEmployee).Scan(&exists); err != nil {
-                                  		log.Printf("Query error: (%v) for table (%v)", err.Error(), "employee")
-                                  		return err
-                                   	}
-                                   	// Migrar datos si la tabla ya existe. De lo contrario, crearla.
-                                   	if exists {
-                                  		employeeMigrate := `
-                                  		CREATE TABLE employee_new(
-                                 			id INTEGER PRIMARY KEY,
-                                 			name TEXT NOT NULL,
-                                 			hire_date TEXT NOT NULL,
-                                 			daily_payment REAL NOT NULL,
-                                 			phone TEXT,
-                                 			email TEXT UNIQUE,
-                                 			nss TEXT UNIQUE,
-                                 			curp TEXT UNIQUE
-                                  		);
-                                  		INSERT INTO employee_new (id, name, hire_date, daily_payment, phone, email, nss, curp)
-                                  		SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee;
-                                  		DROP TABLE employee;
-                                  		ALTER TABLE employee_new RENAME TO employee;`
-                                  		if _, err := tx.Exec(employeeMigrate); err != nil {
-                                 			return fmt.Errorf("Migration error: %w", err)
-                                  		}
-                                   	} else {
-                                  		employeeCreate := `
-                                  		CREATE TABLE IF NOT EXISTS employee(
-                                 			id INTEGER PRIMARY KEY,
-                                 			name TEXT NOT NULL,
-                                 			hire_date TEXT NOT NULL,
-                                 			daily_payment REAL NOT NULL,
-                                 			phone TEXT,
-                                 			email TEXT UNIQUE,
-                                 			nss TEXT UNIQUE,
-                                 			curp TEXT UNIQUE
-                                  		);`
-                                  		if _, err := tx.Exec(employeeCreate); err != nil {
-                                 			return fmt.Errorf("Creation error: %w", err)
-                                  		}
-                                   	}
-
-                                   	return tx.Commit()
-                                }
-                            </code></pre>
-                        </div>
-                        <div class="block" id="types">
-                            <p class="subtitle is-5">Tipado</p>
-                            <p>Establecemos el tipado de cada columna para que ( GO ) pueda manejar los datos.</p>
-                            <div class="content is-size-6">
-                                <blockquote><em>/services/Employee/types/types.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                                package types
-
-                                type Employee struct {
-                                   	Id           int     `json:"id"`
-                                   	Name         string  `json:"name"`
-                                   	HireDate     string  `json:"hireDate"`
-                                   	DailyPayment float64 `json:"dailyPayment"`
-                                   	Phone        int     `json:"phone"`
-                                   	Email        string  `json:"email"`
-                                   	Nss          string  `json:"nss"`
-                                   	Curp         string  `json:"curp"`
-                                }
-
-                                type EmployeeSlice struct {
-                                   	Records     []*Employee `json:"records"`
-                                   	HasNextPage bool        `json:"hasNextPage"`
-                                }
-
-                                type OnlyId struct {
-                                   	Id int `json:"id"`
-                                }
-                            </code></pre>
-                        </div>
-                        <div class="block" id="store">
-                            <p class="subtitle is-5">CRUD ( Queries )</p>
-                            <p>
-                                Las siguientes funciones manejan los queries del servicio.
-                                En pocas palabras el CRUD más un query de busqueda simple.
-                            </p>
-                            <div class="content is-size-6">
-                                <blockquote><em>/services/Employee/store/store.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                                package store
-
-                                import (
-                                   	"database/sql"
-                                   	"saavedra/services/Employee/types"
-                                   	utils "saavedra/utils"
-                                )
-
-                                type Store interface {
-                                   	SliceEmployee(limit, offset int) ([]*types.Employee, int, error)
-                                   	CreateEmployee(employee *types.Employee) error
-                                   	ReadEmployee(id int) (*types.Employee, error)
-                                   	UpdateEmployee(employee *types.Employee) error
-                                   	DeleteEmployee(id int) error
-                                   	SearchEmployee(pattern string, limit, offset int) ([]*types.Employee, int, error)
-                                }
-
-                                type store struct {
-                               	    db *sql.DB
-                                }
-
-                                func New(db *sql.DB) Store {
-                               	    return store{db: db}
-                                }
-
-                                func (s store) SliceEmployee(limit, offset int) ([]*types.Employee, int, error) {
-                                   	q1 := "SELECT COUNT(id) AS count_id FROM employee;"
-                                   	q2 := "SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee LIMIT ? OFFSET ?;"
-
-                                   	var count int
-                                   	err := s.db.QueryRow(q1).Scan(&count)
-                                   	if err != nil {
-                                  		return nil, 0, err
-                                   	}
-
-                                   	rows, err := s.db.Query(q2, limit, offset)
-                                   	if err != nil {
-                                  		return nil, 0, err
-                                   	}
-                                   	defer rows.Close()
-
-                                   	var records []*types.Employee
-                                   	for rows.Next() {
-                                  		var emp types.Employee
-                                  		err = rows.Scan(&emp.Id, &emp.Name, &emp.HireDate, &emp.DailyPayment, &emp.Phone, &emp.Email, &emp.Nss, &emp.Curp)
-                                  		if err != nil {
-                                 			return nil, 0, err
-                                  		}
-                                  		records = append(records, &emp)
-                                   	}
-
-                                   	if rows.Err() != nil {
-                                  		return nil, 0, rows.Err()
-                                   	}
-
-                                   	return records, count, nil
-                                }
-
-                                func (s store) CreateEmployee(employee *types.Employee) error {
-                                   	c := `SELECT id FROM employee WHERE email = ? OR nss = ? OR curp = ?;`
-                                   	q := `INSERT INTO employee(name, hire_date, daily_payment, phone, email, nss, curp) VALUES (?, ?, ?, ?, ?, ?, ?);`
-
-                                   	var id int
-                                   	err := s.db.QueryRow(c, employee.Email, employee.Nss, employee.Curp).Scan(&id)
-                                   	if err == nil {
-                                  		return utils.DuplicatedDataError
-                                   	}
-                                   	if err != sql.ErrNoRows {
-                                  		return err
-                                   	}
-
-                                   	_, err = s.db.Exec(
-                                  		q,
-                                  		employee.Name,
-                                  		employee.HireDate,
-                                  		employee.DailyPayment,
-                                  		employee.Phone,
-                                  		employee.Email,
-                                  		employee.Nss,
-                                  		employee.Curp,
-                                   	)
-                                   	if err != nil {
-                                  		return utils.DuplicatedDataError
-                                   	}
-                                   	return nil
-                                }
-
-                                func (s store) ReadEmployee(id int) (*types.Employee, error) {
-                                   	q := "SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee WHERE id = ?;"
-
-                                   	var emp types.Employee
-                                   	err := s.db.QueryRow(q, id).Scan(&emp.Id, &emp.Name, &emp.HireDate, &emp.DailyPayment, &emp.Phone, &emp.Email, &emp.Nss, &emp.Curp)
-
-                                   	if err == sql.ErrNoRows {
-                                  		return nil, nil
-                                   	} else if err != nil {
-                                  		return nil, err
-                                   	}
-
-                                   	return &emp, nil
-                                }
-
-                                func (s store) UpdateEmployee(employee *types.Employee) error {
-                                   	q := `
-                                   	UPDATE employee
-                                   	SET name = ?, hire_date = ?, daily_payment = ?, phone = ?, email = ?, nss = ?, curp = ?
-                                   	WHERE id = ?;`
-
-                                   	_, err := s.db.Exec(q, employee.Name, employee.HireDate, employee.DailyPayment, employee.Phone, employee.Email, employee.Nss, employee.Curp, employee.Id)
-                                   	if err != nil {
-                                  		return err
-                                   	}
-
-                                   	return nil
-                                }
-
-                                func (s store) DeleteEmployee(id int) error {
-                                   	q := "DELETE FROM employee WHERE id = ?;"
-                                   	if _, err := s.db.Exec(q, id); err != nil {
-                                  		return err
-                                   	}
-                                   	return nil
-                                }
-
-                                func (s store) SearchEmployee(pattern string, limit, offset int) ([]*types.Employee, int, error) {
-                                   	formatedPattern := "%" + pattern + "%"
-
-                                   	q1 := `SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee WHERE name LIKE ? LIMIT ? OFFSET ?;`
-                                   	q2 := `SELECT COUNT(id) AS count_id FROM employee WHERE name LIKE ?;`
-
-                                   	rows, err := s.db.Query(q1, formatedPattern, limit, offset)
-                                   	if err != nil {
-                                  		return nil, 0, err
-                                   	}
-                                   	defer rows.Close()
-
-                                   	var records []*types.Employee
-                                   	for rows.Next() {
-                                  		var record types.Employee
-                                  		if err := rows.Scan(&record.Id, &record.Name, &record.HireDate, &record.DailyPayment, &record.Phone, &record.Email, &record.Nss, &record.Curp); err != nil {
-                                 			return nil, 0, err
-                                  		}
-                                  		records = append(records, &record)
-                                   	}
-
-                                   	if rows.Err() != nil {
-                                  		return nil, 0, rows.Err() // Corregido el error original donde retornaba 'err' en lugar de 'rows.Err()'
-                                   	}
-
-                                   	var count int
-                                   	if err := s.db.QueryRow(q2, formatedPattern).Scan(&count); err != nil {
-                                  		return nil, 0, err
-                                   	}
-
-                                   	return records, count, nil
-                                }
-
-                            </code></pre>
-                        </div>
-                        <div class="block" id="logics">
-                            <p class="subtitle is-5">Servicio</p>
-                            <p>
-                                Esta capa maneja logica. En caso de un CRUD simple basta con cast int para paginas,
-                                limites de queries, JSON decodificación, etc.
-                            </p>
-                            <div class="content is-size-6">
-                                <blockquote><em>/services/Employee/service/service.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                                package service
-
-                                import (
-                                   	"saavedra/services/Employee/store"
-                                   	"saavedra/services/Employee/types"
-                                   	"saavedra/utils"
-                                   	"strconv"
-                                )
-
-                                type Service interface {
-                                   	SliceEmployee(page string) (*types.EmployeeSlice, error)
-                                   	CreateEmployee(employee *types.Employee) error
-                                   	ReadEmployee(id int) (*types.Employee, error)
-                                   	UpdateEmployee(employee *types.Employee) error
-                                   	DeleteEmployee(id int) error
-                                   	SearchEmployee(pattern, page string) (*types.EmployeeSlice, error)
-                                }
-
-                                type service struct {
-                               	    store store.Store
-                                }
-
-                                func New(store store.Store) Service {
-                               	    return service{store: store}
-                                }
-
-                                func (s service) SliceEmployee(page string) (*types.EmployeeSlice, error) {
-                                   	intPage, err := strconv.Atoi(page)
-                                   	if err != nil {
-                                  		intPage = 1
-                                   	}
-                                   	var offset int
-                                   	offset = (intPage - 1) * utils.RecordsPerSlice
-
-                                   	records, count, err := s.store.SliceEmployee(utils.RecordsPerSlice, offset)
-                                   	if err != nil {
-                                  		return nil, err
-                                   	}
-                                   	totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
-                                   	hasNextPage := totalPages > intPage
-
-                                   	employeeSlice := types.EmployeeSlice{
-                                  		Records:     records,
-                                  		HasNextPage: hasNextPage,
-                                   	}
-                                   	return &employeeSlice, nil
-                                }
-
-                                func (s service) CreateEmployee(employee *types.Employee) error {
-                                   	if err := s.store.CreateEmployee(employee); err != nil {
-                                  		return err
-                                   	}
-                                   	return nil
-                                }
-
-                                func (s service) ReadEmployee(id int) (*types.Employee, error) {
-                                   	employee, err := s.store.ReadEmployee(id)
-                                   	if err != nil {
-                                  		return nil, err
-                                   	}
-                                   	return employee, nil
-                                }
-
-                                func (s service) UpdateEmployee(employee *types.Employee) error {
-                                   	if err := s.store.UpdateEmployee(employee); err != nil {
-                                  		return err
-                                   	}
-                                   	return nil
-                                }
-
-                                func (s service) DeleteEmployee(id int) error {
-                                   	if err := s.store.DeleteEmployee(id); err != nil {
-                                  		return err
-                                   	}
-                                   	return nil
-                                }
-
-                                func (s service) SearchEmployee(pattern, page string) (*types.EmployeeSlice, error) {
-                                   	intPage, err := strconv.Atoi(page)
-                                   	if err != nil {
-                                  		intPage = 1
-                                   	}
-                                   	var offset int
-                                   	offset = (intPage - 1) * utils.RecordsPerSlice
-
-                                   	slice, count, err := s.store.SearchEmployee(pattern, utils.RecordsPerSlice, offset)
-                                   	if err != nil {
-                                  		return nil, err
-                                   	}
-                                   	totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
-                                   	hasNextPage := totalPages > intPage
-
-                                   	records := types.EmployeeSlice{
-                                  		Records:     slice,
-                                  		HasNextPage: hasNextPage,
-                                   	}
-                                   	return &records, nil
-                                }
-                            </code></pre>
-                        </div>
-                        <div class="block" id="endpoint">
-                            <p class="subtitle is-5">Endpoints</p>
-                            <p>
-                                Esta capa administra los endpoints y los permisos de usuario a traves de
-                                <strong>AddPermissions</strong>. Para entender su uso revisar <a href="/docs">Documentos</a>.
-                            </p>
-                            <div class="content is-size-6">
-                                <blockquote><em>/services/Employee/api/api.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                            package api
+                        <div class="content is-size-6"><blockquote><em>/services/Employee/sql/sql.go</em></blockquote></div>
+                        <pre><code>
+                            package sql
 
                             import (
-                               	"encoding/json"
-                               	"html/template"
-                               	"log"
-                               	"net/http"
-                               	"saavedra/services/Employee/service"
+                           	"database/sql"
+                           	"fmt"
+                           	"log"
+                            )
+                            func CreateSchema(db *sql.DB) error {
+                               	// Comienzo de transacción SQL
+                               	tx, err := db.Begin()
+                               	if err != nil {
+                              		return err
+                               	}
+                               	// Rollback de respaldo
+                               	defer tx.Rollback()
+                               	// Validar si la tabla ya existe
+                               	var exists bool
+                               	queryCheckEmployee := `SELECT EXISTS(SELECT 1 FROM sqlite_master WHERE type='table' AND name='employee');`
+                               	if err = tx.QueryRow(queryCheckEmployee).Scan(&exists); err != nil {
+                              		log.Printf("Query error: (%v) for table (%v)", err.Error(), "employee")
+                              		return err
+                               	}
+                               	// Migrar datos si la tabla ya existe. De lo contrario, crearla.
+                               	if exists {
+                              		employeeMigrate := `
+                              		CREATE TABLE employee_new(
+                             			id INTEGER PRIMARY KEY,
+                             			name TEXT NOT NULL,
+                             			hire_date TEXT NOT NULL,
+                             			daily_payment REAL NOT NULL,
+                             			phone TEXT,
+                             			email TEXT UNIQUE,
+                             			nss TEXT UNIQUE,
+                             			curp TEXT UNIQUE
+                              		);
+                              		INSERT INTO employee_new (id, name, hire_date, daily_payment, phone, email, nss, curp)
+                              		SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee;
+                              		DROP TABLE employee;
+                              		ALTER TABLE employee_new RENAME TO employee;`
+                              		if _, err := tx.Exec(employeeMigrate); err != nil {
+                             			return fmt.Errorf("Migration error: %w", err)
+                              		}
+                               	} else {
+                              		employeeCreate := `
+                              		CREATE TABLE IF NOT EXISTS employee(
+                             			id INTEGER PRIMARY KEY,
+                             			name TEXT NOT NULL,
+                             			hire_date TEXT NOT NULL,
+                             			daily_payment REAL NOT NULL,
+                             			phone TEXT,
+                             			email TEXT UNIQUE,
+                             			nss TEXT UNIQUE,
+                             			curp TEXT UNIQUE
+                              		);`
+                              		if _, err := tx.Exec(employeeCreate); err != nil {
+                             			return fmt.Errorf("Creation error: %w", err)
+                              		}
+                               	}
+                               	return tx.Commit()
+                            }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="types">
+                        <p class="subtitle is-5">Tipado</p>
+                        <div class="notification is-info is-light has-text-black">
+                            ( GO ) - Tipamos las estructuras que utilizara el servicio. Para un CRUD basta con
+                            construir estructura para <strong>Registro</strong>,
+                            <strong>Slice de Registros</strong> e <strong>Id</strong>
+                        </div>
+                        <div class="content is-size-6">
+                            <blockquote><em>/services/Employee/types/types.go</em></blockquote>
+                        </div>
+                        <pre><code>
+                            package types
+
+                            type Employee struct {
+                               	Id           int     `json:"id"`
+                               	Name         string  `json:"name"`
+                               	HireDate     string  `json:"hireDate"`
+                               	DailyPayment float64 `json:"dailyPayment"`
+                               	Phone        int     `json:"phone"`
+                               	Email        string  `json:"email"`
+                               	Nss          string  `json:"nss"`
+                               	Curp         string  `json:"curp"`
+                            }
+
+                            type EmployeeSlice struct {
+                               	Records     []*Employee `json:"records"`
+                               	HasNextPage bool        `json:"hasNextPage"`
+                            }
+
+                            type OnlyId struct {
+                               	Id int `json:"id"`
+                            }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="store">
+                        <p class="subtitle is-5">CRUD</p><p>Capa de persitencia de datos.</p>
+                        <div class="notification is-info is-light has-text-black">
+                            QUERIES - Slice de datos, filtros, más CRUD.
+                        </div>
+                        <div class="content is-size-6"><blockquote><em>/services/Employee/store/store.go</em></blockquote></div>
+                        <pre><code>
+                            package store
+
+                            import (
+                               	"database/sql"
+                               	"saavedra/services/Employee/types"
+                               	utils "saavedra/utils"
+                            )
+
+                            type Store interface {
+                               	SliceEmployee(limit, offset int) ([]*types.Employee, int, error)
+                               	CreateEmployee(employee *types.Employee) error
+                               	ReadEmployee(id int) (*types.Employee, error)
+                               	UpdateEmployee(employee *types.Employee) error
+                               	DeleteEmployee(id int) error
+                               	SearchEmployee(pattern string, limit, offset int) ([]*types.Employee, int, error)
+                            }
+
+                            type store struct {
+                           	    db *sql.DB
+                            }
+
+                            func New(db *sql.DB) Store {
+                           	    return store{db: db}
+                            }
+
+                            func (s store) SliceEmployee(limit, offset int) ([]*types.Employee, int, error) {
+                               	q1 := "SELECT COUNT(id) AS count_id FROM employee;"
+                               	q2 := "SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee LIMIT ? OFFSET ?;"
+                               	var count int
+                               	err := s.db.QueryRow(q1).Scan(&count)
+                               	if err != nil {
+                              		return nil, 0, err
+                               	}
+                               	rows, err := s.db.Query(q2, limit, offset)
+                               	if err != nil {
+                              		return nil, 0, err
+                               	}
+                               	defer rows.Close()
+                               	var records []*types.Employee
+                               	for rows.Next() {
+                              		var emp types.Employee
+                              		err = rows.Scan(&emp.Id, &emp.Name, &emp.HireDate, &emp.DailyPayment, &emp.Phone, &emp.Email, &emp.Nss, &emp.Curp)
+                              		if err != nil {
+                             			return nil, 0, err
+                              		}
+                              		records = append(records, &emp)
+                               	}
+                               	if rows.Err() != nil {
+                              		return nil, 0, rows.Err()
+                               	}
+                               	return records, count, nil
+                            }
+
+                            func (s store) CreateEmployee(employee *types.Employee) error {
+                               	c := `SELECT id FROM employee WHERE email = ? OR nss = ? OR curp = ?;`
+                               	q := `INSERT INTO employee(name, hire_date, daily_payment, phone, email, nss, curp) VALUES (?, ?, ?, ?, ?, ?, ?);`
+                               	var id int
+                               	err := s.db.QueryRow(c, employee.Email, employee.Nss, employee.Curp).Scan(&id)
+                               	if err == nil {
+                              		return utils.DuplicatedDataError
+                               	}
+                               	if err != sql.ErrNoRows {
+                              		return err
+                               	}
+                               	_, err = s.db.Exec(
+                              		q,
+                              		employee.Name,
+                              		employee.HireDate,
+                              		employee.DailyPayment,
+                              		employee.Phone,
+                              		employee.Email,
+                              		employee.Nss,
+                              		employee.Curp,
+                               	)
+                               	if err != nil {
+                              		return utils.DuplicatedDataError
+                               	}
+                               	return nil
+                            }
+
+                            func (s store) ReadEmployee(id int) (*types.Employee, error) {
+                               	q := "SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee WHERE id = ?;"
+                               	var emp types.Employee
+                               	err := s.db.QueryRow(q, id).Scan(&emp.Id, &emp.Name, &emp.HireDate, &emp.DailyPayment, &emp.Phone, &emp.Email, &emp.Nss, &emp.Curp)
+                               	if err == sql.ErrNoRows {
+                              		return nil, nil
+                               	} else if err != nil {
+                              		return nil, err
+                               	}
+                               	return &emp, nil
+                            }
+
+                            func (s store) UpdateEmployee(employee *types.Employee) error {
+                               	q := `
+                               	UPDATE employee
+                               	SET name = ?, hire_date = ?, daily_payment = ?, phone = ?, email = ?, nss = ?, curp = ?
+                               	WHERE id = ?;`
+                               	_, err := s.db.Exec(q, employee.Name, employee.HireDate, employee.DailyPayment, employee.Phone, employee.Email, employee.Nss, employee.Curp, employee.Id)
+                               	if err != nil {
+                              		return err
+                               	}
+                               	return nil
+                            }
+
+                            func (s store) DeleteEmployee(id int) error {
+                               	q := "DELETE FROM employee WHERE id = ?;"
+                               	if _, err := s.db.Exec(q, id); err != nil {
+                              		return err
+                               	}
+                               	return nil
+                            }
+
+                            func (s store) SearchEmployee(pattern string, limit, offset int) ([]*types.Employee, int, error) {
+                               	formatedPattern := "%" + pattern + "%"
+                               	q1 := `SELECT id, name, hire_date, daily_payment, phone, email, nss, curp FROM employee WHERE name LIKE ? LIMIT ? OFFSET ?;`
+                               	q2 := `SELECT COUNT(id) AS count_id FROM employee WHERE name LIKE ?;`
+                               	rows, err := s.db.Query(q1, formatedPattern, limit, offset)
+                               	if err != nil {
+                              		return nil, 0, err
+                               	}
+                               	defer rows.Close()
+                               	var records []*types.Employee
+                               	for rows.Next() {
+                              		var record types.Employee
+                              		if err := rows.Scan(&record.Id, &record.Name, &record.HireDate, &record.DailyPayment, &record.Phone, &record.Email, &record.Nss, &record.Curp); err != nil {
+                             			return nil, 0, err
+                              		}
+                              		records = append(records, &record)
+                               	}
+                               	if rows.Err() != nil {
+                              		return nil, 0, rows.Err() // Corregido el error original donde retornaba 'err' en lugar de 'rows.Err()'
+                               	}
+                               	var count int
+                               	if err := s.db.QueryRow(q2, formatedPattern).Scan(&count); err != nil {
+                              		return nil, 0, err
+                               	}
+                               	return records, count, nil
+                            }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="logics">
+                        <p class="subtitle is-5">Servicio</p>
+                        <div class="notification is-dark has-text-white">
+                            Lógica de negocio, cast de datos, llamadas a <strong class="has-text-warning">Python</strong>, decoding etc...
+                        </div>
+                        <div class="content is-size-6"><blockquote><em>/services/Employee/service/service.go</em></blockquote></div>
+                        <pre><code>
+                            package service
+
+                            import (
+                               	"saavedra/services/Employee/store"
                                	"saavedra/services/Employee/types"
                                	"saavedra/utils"
                                	"strconv"
                             )
 
-                            type EndpointHandler struct {
-                               	service service.Service
+                            type Service interface {
+                               	SliceEmployee(page string) (*types.EmployeeSlice, error)
+                               	CreateEmployee(employee *types.Employee) error
+                               	ReadEmployee(id int) (*types.Employee, error)
+                               	UpdateEmployee(employee *types.Employee) error
+                               	DeleteEmployee(id int) error
+                               	SearchEmployee(pattern, page string) (*types.EmployeeSlice, error)
                             }
 
-                            func New(service service.Service) EndpointHandler {
-                               	return EndpointHandler{service: service}
+                            type service struct {
+                           	    store store.Store
                             }
 
-                            // ROUTE: "/employee/slice": viaja numero de pagina(page) en la URL.
-                            func (e EndpointHandler) CallSliceEmployees(w http.ResponseWriter, r *http.Request) {
-                               	switch r.Method {
-                               	case http.MethodGet:
-                              		page := r.URL.Query().Get("page")
-                              		records, err := e.service.SliceEmployee(page)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/slice' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.Header().Set("Content-Type", "application/json")
-                              		w.WriteHeader(http.StatusOK)
-                              		json.NewEncoder(w).Encode(records)
-                               	default:
-                              		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
-                               	}
-                                                            }
-
-                            // ROUTE: '/employee'
-                            func (e EndpointHandler) CallEmployees(w http.ResponseWriter, r *http.Request) {
-                               	switch r.Method {
-                               	case http.MethodGet:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(1, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		tpl, err := template.ParseFiles("services/Employee/views/list.html")
-                              		if err != nil {
-                             			log.Printf("Error '/employee' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		err = tpl.Execute(w, map[string]string{"Service": "Empleados"})
-                              		if err != nil {
-                             			log.Printf("Error '/employee' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                               	default:
-                              		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
-                               	}
-                                                            }
-
-                            // ROUTE: "/employee/new"
-                            func (e EndpointHandler) CallEmployeesNew(w http.ResponseWriter, r *http.Request) {
-                               	switch r.Method {
-                               	case http.MethodGet:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(1, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		tpl, err := template.ParseFiles("services/Employee/views/new.html")
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		breadcrumb := map[string]string{"Service": "Empleados", "View1": "Nuevo"}
-                              		if err = tpl.Execute(w, breadcrumb); err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                               	case http.MethodPost:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(2, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		var record types.Employee
-                              		if err := json.NewDecoder(r.Body).Decode(&record); err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		err = e.service.CreateEmployee(&record)
-                              		if err == utils.DuplicatedDataError {
-                             			log.Print(utils.DuplicatedDataError.Error())
-                             			http.Error(w, utils.DuplicatedDataError.Error(), http.StatusConflict)
-                             			return
-                              		} else if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.WriteHeader(http.StatusOK)
-                               	default:
-                              		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
-                               	}
-                                                            }
-
-                            // ROUTE: "/employee/record"
-                            func (e EndpointHandler) CallEmployeesRecord(w http.ResponseWriter, r *http.Request) {
-                               	switch r.Method {
-                               	case http.MethodGet:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(1, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		id := r.URL.Query().Get("id")
-                              		intId, err := strconv.Atoi(id)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		tpl, err := template.ParseFiles("services/Employee/views/record.html")
-                              		if err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		breadcrumb := map[string]any{"Id": intId, "Service": "Empleados", "View1": "Editar Empleado"}
-                              		if err = tpl.Execute(w, breadcrumb); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                              		}
-                               	case http.MethodPost:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(1, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		var body types.OnlyId
-                              		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		record, err := e.service.ReadEmployee(body.Id)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.Header().Set("Content-Type", "application/json")
-                              		w.WriteHeader(http.StatusOK)
-                              		json.NewEncoder(w).Encode(record)
-                               	case http.MethodPut:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(3, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		var employee types.Employee
-                              		if err := json.NewDecoder(r.Body).Decode(&employee); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if err := e.service.UpdateEmployee(&employee); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.WriteHeader(http.StatusOK)
-                               	case http.MethodDelete:
-                              		party := r.Context().Value(utils.UserParty).(string)
-                              		valid, err := utils.AddPermissions(4, party)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/new' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if !valid {
-                             			w.WriteHeader(http.StatusUnauthorized)
-                             			return
-                              		}
-                              		var body types.OnlyId
-                              		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		if err := e.service.DeleteEmployee(body.Id); err != nil {
-                             			log.Printf("Error '/employee/record' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.WriteHeader(http.StatusOK)
-                               	default:
-                              		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
-                               	}
-                                                            }
-
-                            // ROUTE: "/employee/search"
-                            func (e EndpointHandler) CallEmployeesSearch(w http.ResponseWriter, r *http.Request) {
-                               	switch r.Method {
-                               	case http.MethodGet:
-                              		pattern := r.URL.Query().Get("pattern")
-                              		page := r.URL.Query().Get("page")
-                              		slice, err := e.service.SearchEmployee(pattern, page)
-                              		if err != nil {
-                             			log.Printf("Error '/employee/search' (%v)", err.Error())
-                             			http.Error(w, err.Error(), http.StatusInternalServerError)
-                             			return
-                              		}
-                              		w.Header().Set("Content-Type", "application/json")
-                              		w.WriteHeader(http.StatusOK)
-                              		json.NewEncoder(w).Encode(slice)
-                               	default:
-                              		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
-                               	}
+                            func New(store store.Store) Service {
+                           	    return service{store: store}
                             }
-                            </code></pre>
-                        </div>
-                        <div class="block" id="router">
-                            <p class="subtitle is-5">Router</p>
-                            <p>
-                                Esta capa unicmanete registra las rutas.
-                                Sin embargo para rutas de aplicación como es el caso.
-                                Usar ( AuthMiddlerWare ) para protejer rutas.
-                            </p>
-                            <p class="has-text-danger">Notar como en esta capa hacemos uso de todas las capas inferiores.</p>
-                            <div class="content is-size-6">
-                                <blockquote><em>/services/Employee/router/router.go</em></blockquote>
-                            </div>
-                            <pre><code>
-                                package router
 
-                                import (
-                                   	"database/sql"
-                                   	"net/http"
-                                   	"saavedra/services/Employee/api"
-                                   	"saavedra/services/Employee/service"
-                                   	"saavedra/services/Employee/store"
-                                   	"saavedra/utils"
-                                )
-                                func Assambler(mux *http.ServeMux, db *sql.DB) {
-                                   	storing := store.New(db)
-                                   	servicing := service.New(storing)
-                                   	handler := api.New(servicing)
-
-                                   	mux.Handle("/employee", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployees)))
-                                   	mux.Handle("/employee/new", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesNew)))
-                                   	mux.Handle("/employee/slice", utils.AuthMiddleware(http.HandlerFunc(handler.CallSliceEmployees)))
-                                   	mux.Handle("/employee/record", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesRecord)))
-                                   	mux.Handle("/employee/search", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesSearch)))
-                                }
-                            </code></pre>
-                        </div>
-                        <div class="block" id="register">
-                            <p class="subtitle is-5">Registro</p>
-                            <p>
-                                Por ultimo se deben registrar las tablas del servicio,
-                                y se deben registrar sus rutas.
-                            </p>
-                            <p class="has-text-danger">
-                                El registro se debe realizar en el fichero <em>main.go</em>.
-                                Las importaciones se deben hacer con alias.
-                                Notar el orden, donde se hace uso de
-                                <strong>db *sql.DB</strong> y <strong>mux *http.ServeMux</strong>
-                            </p>
-                            <pre><code>
-                                import (
-                                    employeeRouter "saavedra/services/Employee/router"
-                                    employeeSQL "saavedra/services/Employee/sql"
-                                )
-                                if err = employeeSQL.CreateSchema(db); err != nil {
-                              		log.Fatal(err.Error())
+                            func (s service) SliceEmployee(page string) (*types.EmployeeSlice, error) {
+                               	intPage, err := strconv.Atoi(page)
+                               	if err != nil {
+                              		intPage = 1
                                	}
-                                employeeRouter.Assambler(mux, db)
-                            </code></pre>
-                        </div>
-                    </section>
+                               	var offset int
+                               	offset = (intPage - 1) * utils.RecordsPerSlice
 
-                    <section id="frontend-tutorial" class="section">
-                    </section>
-                </div>
+                               	records, count, err := s.store.SliceEmployee(utils.RecordsPerSlice, offset)
+                               	if err != nil {
+                              		return nil, err
+                               	}
+                               	totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
+                               	hasNextPage := totalPages > intPage
+
+                               	employeeSlice := types.EmployeeSlice{
+                              		Records:     records,
+                              		HasNextPage: hasNextPage,
+                               	}
+                               	return &employeeSlice, nil
+                            }
+
+                            func (s service) CreateEmployee(employee *types.Employee) error {
+                               	if err := s.store.CreateEmployee(employee); err != nil {
+                              		return err
+                               	}
+                               	return nil
+                            }
+
+                            func (s service) ReadEmployee(id int) (*types.Employee, error) {
+                               	employee, err := s.store.ReadEmployee(id)
+                               	if err != nil {
+                              		return nil, err
+                               	}
+                               	return employee, nil
+                            }
+
+                            func (s service) UpdateEmployee(employee *types.Employee) error {
+                               	if err := s.store.UpdateEmployee(employee); err != nil {
+                              		return err
+                               	}
+                               	return nil
+                            }
+
+                            func (s service) DeleteEmployee(id int) error {
+                               	if err := s.store.DeleteEmployee(id); err != nil {
+                              		return err
+                               	}
+                               	return nil
+                            }
+
+                            func (s service) SearchEmployee(pattern, page string) (*types.EmployeeSlice, error) {
+                               	intPage, err := strconv.Atoi(page)
+                               	if err != nil {
+                              		intPage = 1
+                               	}
+                               	var offset int
+                               	offset = (intPage - 1) * utils.RecordsPerSlice
+
+                               	slice, count, err := s.store.SearchEmployee(pattern, utils.RecordsPerSlice, offset)
+                               	if err != nil {
+                              		return nil, err
+                               	}
+                               	totalPages := utils.CalculateTotalPages(count, utils.RecordsPerSlice)
+                               	hasNextPage := totalPages > intPage
+
+                               	records := types.EmployeeSlice{
+                              		Records:     slice,
+                              		HasNextPage: hasNextPage,
+                               	}
+                               	return &records, nil
+                            }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="endpoint">
+                        <p class="subtitle is-5">Endpoints</p>
+                        <p>
+                            Además de los endpoints esta capa administra permisos de usuario
+                            ( <a href="/docs#add-permissions" target="_new">AddPermissions</a> ).
+                        </p>
+                        <div class="content is-size-6"><blockquote><em>/services/Employee/api/api.go</em></blockquote></div>
+                        <pre><code>
+                        package api
+
+                        import (
+                           	"encoding/json"
+                           	"html/template"
+                           	"log"
+                           	"net/http"
+                           	"saavedra/services/Employee/service"
+                           	"saavedra/services/Employee/types"
+                           	"saavedra/utils"
+                           	"strconv"
+                        )
+
+                        type EndpointHandler struct {
+                           	service service.Service
+                        }
+
+                        func New(service service.Service) EndpointHandler {
+                           	return EndpointHandler{service: service}
+                        }
+
+                        // ROUTE: "/employee/slice": viaja numero de pagina(page) en la URL.
+                        func (e EndpointHandler) CallSliceEmployees(w http.ResponseWriter, r *http.Request) {
+                           	switch r.Method {
+                           	case http.MethodGet:
+                          		page := r.URL.Query().Get("page")
+                          		records, err := e.service.SliceEmployee(page)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/slice' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.Header().Set("Content-Type", "application/json")
+                          		w.WriteHeader(http.StatusOK)
+                          		json.NewEncoder(w).Encode(records)
+                           	default:
+                          		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+                           	}
+                        }
+
+                        // ROUTE: '/employee'
+                        func (e EndpointHandler) CallEmployees(w http.ResponseWriter, r *http.Request) {
+                           	switch r.Method {
+                           	case http.MethodGet:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(1, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		tpl, err := template.ParseFiles("services/Employee/views/list.html")
+                          		if err != nil {
+                         			log.Printf("Error '/employee' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		err = tpl.Execute(w, map[string]string{"Service": "Empleados"})
+                          		if err != nil {
+                         			log.Printf("Error '/employee' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                           	default:
+                          		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+                           	}
+                        }
+
+                        // ROUTE: "/employee/new"
+                        func (e EndpointHandler) CallEmployeesNew(w http.ResponseWriter, r *http.Request) {
+                           	switch r.Method {
+                           	case http.MethodGet:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(1, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		tpl, err := template.ParseFiles("services/Employee/views/new.html")
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		breadcrumb := map[string]string{"Service": "Empleados", "View1": "Nuevo"}
+                          		if err = tpl.Execute(w, breadcrumb); err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                           	case http.MethodPost:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(2, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		var record types.Employee
+                          		if err := json.NewDecoder(r.Body).Decode(&record); err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		err = e.service.CreateEmployee(&record)
+                          		if err == utils.DuplicatedDataError {
+                         			log.Print(utils.DuplicatedDataError.Error())
+                         			http.Error(w, utils.DuplicatedDataError.Error(), http.StatusConflict)
+                         			return
+                          		} else if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.WriteHeader(http.StatusOK)
+                           	default:
+                          		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+                           	}
+                        }
+
+                        // ROUTE: "/employee/record"
+                        func (e EndpointHandler) CallEmployeesRecord(w http.ResponseWriter, r *http.Request) {
+                           	switch r.Method {
+                           	case http.MethodGet:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(1, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		id := r.URL.Query().Get("id")
+                          		intId, err := strconv.Atoi(id)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		tpl, err := template.ParseFiles("services/Employee/views/record.html")
+                          		if err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		breadcrumb := map[string]any{"Id": intId, "Service": "Empleados", "View1": "Editar Empleado"}
+                          		if err = tpl.Execute(w, breadcrumb); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                          		}
+                           	case http.MethodPost:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(1, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		var body types.OnlyId
+                          		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		record, err := e.service.ReadEmployee(body.Id)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.Header().Set("Content-Type", "application/json")
+                          		w.WriteHeader(http.StatusOK)
+                          		json.NewEncoder(w).Encode(record)
+                           	case http.MethodPut:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(3, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		var employee types.Employee
+                          		if err := json.NewDecoder(r.Body).Decode(&employee); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if err := e.service.UpdateEmployee(&employee); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.WriteHeader(http.StatusOK)
+                           	case http.MethodDelete:
+                          		party := r.Context().Value(utils.UserParty).(string)
+                          		valid, err := utils.AddPermissions(4, party)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/new' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if !valid {
+                         			w.WriteHeader(http.StatusUnauthorized)
+                         			return
+                          		}
+                          		var body types.OnlyId
+                          		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		if err := e.service.DeleteEmployee(body.Id); err != nil {
+                         			log.Printf("Error '/employee/record' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.WriteHeader(http.StatusOK)
+                           	default:
+                          		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+                           	}
+                                                        }
+
+                        // ROUTE: "/employee/search"
+                        func (e EndpointHandler) CallEmployeesSearch(w http.ResponseWriter, r *http.Request) {
+                           	switch r.Method {
+                           	case http.MethodGet:
+                          		pattern := r.URL.Query().Get("pattern")
+                          		page := r.URL.Query().Get("page")
+                          		slice, err := e.service.SearchEmployee(pattern, page)
+                          		if err != nil {
+                         			log.Printf("Error '/employee/search' (%v)", err.Error())
+                         			http.Error(w, err.Error(), http.StatusInternalServerError)
+                         			return
+                          		}
+                          		w.Header().Set("Content-Type", "application/json")
+                          		w.WriteHeader(http.StatusOK)
+                          		json.NewEncoder(w).Encode(slice)
+                           	default:
+                          		http.Error(w, "Invalid Method", http.StatusMethodNotAllowed)
+                           	}
+                        }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="router">
+                        <p class="subtitle is-5">Router</p>
+                        <p>
+                            Creando rutas se recomienda agregar la proteccion JWT usando
+                            ( <a href="/docs#auth-middle-ware">AuthMiddleWare</a> ).
+                        </p>
+                        <div class="content is-size-6"><blockquote><em>/services/Employee/router/router.go</em></blockquote></div>
+                        <div class="notification is-danger is-light has-text-black">
+                            Notar como en <strong>router</strong> hacemos uso de todas las capas inferiores.
+                        </div>
+                        <pre><code>
+                            package router
+
+                            import (
+                               	"database/sql"
+                               	"net/http"
+                               	"saavedra/services/Employee/api"
+                               	"saavedra/services/Employee/service"
+                               	"saavedra/services/Employee/store"
+                               	"saavedra/utils"
+                            )
+                            func Assambler(mux *http.ServeMux, db *sql.DB) {
+                               	storing := store.New(db)
+                               	servicing := service.New(storing)
+                               	handler := api.New(servicing)
+
+                               	mux.Handle("/employee", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployees)))
+                               	mux.Handle("/employee/new", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesNew)))
+                               	mux.Handle("/employee/slice", utils.AuthMiddleware(http.HandlerFunc(handler.CallSliceEmployees)))
+                               	mux.Handle("/employee/record", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesRecord)))
+                               	mux.Handle("/employee/search", utils.AuthMiddleware(http.HandlerFunc(handler.CallEmployeesSearch)))
+                            }
+                        </code></pre>
+                    </div>
+                    <div class="block" id="register">
+                        <p class="subtitle is-5">Registro</p>
+                        <p>Por último se registran las tablas y las rutas del servicio.</p>
+                        <div class="notification is-danger is-light has-text-black">
+                            El registro se debe realizar en el fichero <strong>main.go</strong>.
+                            Las importaciones se deben hacer con alias. Notar la inyección de dependencias para
+                            ( <strong>db *sql.DB</strong> ) y ( <strong>mux *http.ServeMux</strong> ).
+                        </div>
+                        <pre><code>
+                            import (
+                                employeeRouter "saavedra/services/Employee/router"
+                                employeeSQL "saavedra/services/Employee/sql"
+                            )
+                            if err = employeeSQL.CreateSchema(db); err != nil {
+                          		log.Fatal(err.Error())
+                           	}
+                            employeeRouter.Assambler(mux, db)
+                        </code></pre>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL FRONTEND -->
+                <section id="frontend-tutorial" class="section">
+                    <div class="subtitle is-3">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-image"></i></span>
+                            <span id="backend">Frontend</span>
+                        </span>
+                    </div>
+                    <div class="block" id="register-menu">
+                        <p class="subtitle is-5">Menu</p>
+                        <p>Para obtener la plantilla de ( menuitem ) copiar desde ( <a href="/docs#menu" target="_new">Menuitem</a> ).</p>
+                        <div class="content is-size-6">
+                            <blockquote>Colocar en <em>/services/Saavedra/Home/views/html.home</em></blockquote>
+                        </div>
+                    </div>
+                    <div class="block" id="redirect-service">
+                        <p class="subtitle is-5">Abrir Servicio</p>
+                        <p>Relacionar la acción del ( menuitem ) con la dirección del servicio.</p>
+                        <p>Dependiendo del servicio se puede redirigir a un ( submenu ) o a la vista lista.</p>
+                        <p>Basta con usar la función ( <a href="/docs#nav-js">OnlyRedirect</a> ) para este proposito.</p>
+                        <div class="content is-size-6">
+                            <blockquote><em>/assets/src/js/Saavedra/saavedra.js</em> <strong>"homeComponent"</strong>.</blockquote>
+                        </div>
+                        <pre><code>
+                            // goAction es un ejemplo. Pero se recomienda usar go... Cuando redireccionamos.
+                            async goAction() {
+                                var res = await OnlyRedirect("/employee");
+                                this.authError = res.authError
+                            },
+                        </code></pre>
+                    </div>
+                    <div class="block" id="list-view">
+                        <p class="subtitle is-5">Vista Lista</p>
+                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                    </div>
+                    <div class="block" id="new-view">
+                        <p class="subtitle is-5">Vista Nuevo</p>
+                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                    </div>
+                    <div class="block" id="record-view">
+                        <p class="subtitle is-5">Vista Record</p>
+                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                    </div>
+                    <div class="block" id="component">
+                        <p class="subtitle is-5">Componentes ( Alpine.js )</p>
+                        <div class="notification is-warning is-light has-text-black">
+                            <strong>Notar: </strong> que existe un componente por plantilla HTML pero un solo fichero ( JS ) por servicio
+                            <em>/assets/src/js/Employee/employee.js</em>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
-    </section>
-
+    </div>
+</section>
 </div>
-
 </main>
 </body>
 </html>
