@@ -933,24 +933,386 @@
                     <div class="block" id="list-view">
                         <p class="subtitle is-5">Vista Lista</p>
                         <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                        <div class="notification is-danger is-light has-text-black">
+                            Todas las plantillas omiten los campos ( <strong>Columnas</strong> ).
+                            Por tanto es importante agregarlos segun el tipo de dato en las vistas <strong>Nuevo & Record</strong>.
+                            Mientras que en la vista <strong>Lista</strong> basta con registrarlos en <strong>&lttd&gt&lttd&gt</strong>.
+                        </div>
+                        <pre><code>
+                            &lt;main class="hero"&gt
+                                &lt;section class="container"&gt
+                                    &lt;div class="columns"&gt
+                                        &lt;div class="column is-1"&gt
+                                            &lt;div class="buttons is-left"&gt
+                                                &lt;button class="button is-primary is-small is-fullwidth is-rounded" @click="newRecord"&gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-circle-plus"&gt&lt;/i&gt&lt;/span&gt
+                                                    &lt;span&gtNuevo&lt;/span&gt
+                                                &lt;/button&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;div class="column is-3"&gt
+                                            &lt;div class="field"&gt
+                                                &lt;div class="control is-small has-icons-left"&gt
+                                                    &lt;input class="input is-small is-rounded" type="text" placeholder="Buscador por nombre" x-model="pattern"&gt
+                                                    &lt;span class="icon is-small is-left"&gt&lt;i class="fa-solid fa-magnifying-glass"&gt&lt;/i&gt&lt;/span&gt
+                                                &lt;/div&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;div class="column is-4"&gt
+                                            &lt;div class="buttons is-left"&gt
+                                                &lt;button
+                                                    class="button is-info is-small is-rounded"
+                                                    @click="search"
+                                                    :disabled="(pattern === '')"
+                                                &gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-magnifying-glass"&gt&lt;/i&gt&lt;/span&gt
+                                                    &lt;span&gtBuscar&lt;/span&gt
+                                                &lt;/button&gt
+                                                &lt;button class="button is-danger is-small is-rounded" @click="clean" x-show="(pattern !== '')"&gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-spray-can-sparkles"&gt&lt;/i&gt&lt;/span&gt
+                                                    &lt;span&gtLimpiar&lt;/span&gt
+                                                &lt;/button&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;div class="column is-4"&gt
+                                            &lt;div class="buttons is-right"&gt
+                                                &lt;button
+                                                    class="button is-small is-warning"
+                                                    @click="previousPage"
+                                                    :disabled="block"
+                                                &gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-minus"&gt&lt;/i&gt&lt;/span&gt
+                                                &lt;/button&gt
+                                                &lt;span class="button is-static is-small is-text" x-text="`Página ${page}`"&gt&lt;/span&gt
+                                                &lt;button class="button is-small is-warning" @click="nextPage" :disabled="(!hasNextPage || loading)"&gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-plus"&gt&lt;/i&gt&lt;/span&gt
+                                                &lt;/button&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                    &lt;/div&gt
+                                    &lt;table class="table is-striped is-narrow is-hoverable is-fullwidth"&gt
+                                        &lt;thead&gt
+                                            &lt;tr&gt
+                                                &lt;th&gtId&lt;/th&gt
+                                            &lt;/tr&gt
+                                        &lt;/thead&gt
+                                        &lt;tbody&gt
+                                            &lt;template x-for="" :key=""&gt
+                                                &lt;tr @click="openRecord()" class="focus"&gt
+                                                    &lt;td x-text=""&gt&lt;/td&gt
+                                                &lt;/tr&gt
+                                            &lt;/template&gt
+                                            &lt;tr x-show="(records === [])"&gt
+                                                &lt;td colspan="8"&gt...&lt;/td&gt
+                                            &lt;/tr&gt
+                                        &lt;/tbody&gt
+                                    &lt;/table&gt
+                                &lt;/section&gt
+                            &lt;/main&gt
+                        </code></pre>
                     </div>
                     <div class="block" id="new-view">
                         <p class="subtitle is-5">Vista Nuevo</p>
                         <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                        <pre><code>
+                            &lt;main class="hero"&gt
+                            &lt;section class="container"&gt
+                                &lt;div class="box"&gt
+                                    &lt;div class="columns"&gt
+                                        &lt;div class="column is-12"&gt
+                                            &lt;div class="buttons"&gt
+                                                &lt;button class="button is-info is-small" @click="createRecord" :disabled="required"&gt
+                                                    &lt;span class="icon"&gt&lt;i class="fa-solid fa-floppy-disk"&gt&lt;/i&gt&lt;/span&gt
+                                                    &lt;span&gtCrear Registro&lt;/span&gt
+                                                &lt;/button&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                    &lt;/div&gt
+                                    &lt;div class="columns"&gt
+                                        &lt;div class="column is-12" x-show="authError"&gt
+                                            &lt;div class="notification is-danger is-light"&gt
+                                                &lt;button class="delete" @click="close"&gt&lt;/button&gt
+                                                &lt;p class="has-text-left is-size-7"&gt
+                                                    &lt;span class="icon-text"&gt
+                                                        &lt;span class="icon"&gt&lt;i class="fa-solid fa-triangle-exclamation"&gt&lt;/i&gt&lt;/span&gt
+                                                        &lt;span&gt...&lt;/span&gt
+                                                    &lt;/span&gt
+                                                &lt;/p&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                    &lt;/div&gt
+                                    &lt;div class="columns"&gt
+                                        &lt;!-- INPUT --&gt
+                                        &lt;div class="column is-4"&gt
+                                            &lt;label class="label is-small"&gt...&lt;/label&gt
+                                            &lt;div class="control has-icons-left"&gt
+                                                &lt;input class="input is-small" type="" placeholder="" x-model=""&gt;
+                                                &lt;span class="icon is-small is-left"&gt&lt;!-- ICON --&gt&lt;/span&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;!--CAMPO MONEDA O FLOAT --&gt
+                                        &lt;div class="column is-4"&gt
+                                            &lt;label class="label is-small"&gt...&lt;/label&gt
+                                            &lt;div class="control has-icons-left"&gt
+                                                &lt;input
+                                                    class="input is-small"
+                                                    type="text"
+                                                    placeholder=""
+                                                    x-model="var"
+                                                    @blur="var = currency($event.target.value)"
+                                                &gt;
+                                                &lt;span class="icon is-small is-left"&gt&lt;!-- ICON --&gt&lt;/span&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;!-- CAMPO INTEGER --&gt
+                                        &lt;div class="column is-4"&gt
+                                            &lt;label class="label is-small"&gt...&lt;/label&gt
+                                            &lt;div class="control has-icons-left"&gt
+                                                &lt;input
+                                                    class="input is-small"
+                                                    type=""
+                                                    placeholder=""
+                                                    x-model="var"
+                                                    @blur="var = integer($event.target.value)"
+                                                &gt;
+                                                &lt;span class="icon is-small is-left"&gt&lt;!-- ICON --&gt&lt;/span&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                        &lt;!-- SELECTION --&gt
+                                        &lt;div class="column is-2"&gt
+                                            &lt;label class="label is-small"&gt...&lt;/label&gt
+                                            &lt;div class="control has-icons-left"&gt
+                                                &lt;input class="input is-small" list="list-id" id="input-id" placeholder="" x-model=""&gt
+                                                &lt;span class="icon is-small is-left"&gt&lt;!-- ICON --&gt&lt;/span&gt
+                                                &lt;datalist id="list-id"&gt
+                                                    &lt;template x-for="" :key=""&gt
+                                                        &lt;option :value="" x-text=""&gt&lt;/option&gt
+                                                    &lt;/template&gt
+                                                &lt;/datalist&gt
+                                            &lt;/div&gt
+                                        &lt;/div&gt
+                                    &lt;/div&gt
+                                &lt;/div&gt
+                            &lt;/section&gt
+                            &lt;/main&gt
+                        </code></pre>
                     </div>
                     <div class="block" id="record-view">
                         <p class="subtitle is-5">Vista Record</p>
                         <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                        <div class="notification is-info is-light has-text-black">
+                            Tanto la plantilla <strong>Nuevo & Record</strong> comparten la misma base.
+                            La unica diferencia sera que se agregara un nuevo boton en la cinta de acciones.
+                            <em>class="columns"</em>. El nuevo boton sera <strong>Elminar Registro</strong>.
+                            Se remplazará <em>class="column is-12"</em> por <strong>2</strong> secciones con
+                            <em>class="column is-6"</em> además se recomienda alinear el boton a la derecha
+                            para evitar presionarlo por error.
+                        </div>
+                        <pre><code>
+                            &lt;div class="column is-6"&gt
+                                &lt;div class="buttons is-right"&gt
+                                    &lt;button class="button is-danger is-small" @click="deleteRecord" :disabled="required"&gt
+                                        &lt;span class="icon"&gt&lt;i class="fa-solid fa-trash"&gt&lt;/i&gt&lt;/span&gt
+                                        &lt;span&gtEliminar Registro&lt;/span&gt
+                                    &lt;/button&gt
+                                &lt;/div&gt
+                            &lt;/div&gt
+                        </code></pre>
                     </div>
                     <div class="block" id="component">
                         <p class="subtitle is-5">Componentes ( Alpine.js )</p>
                         <div class="notification is-warning is-light has-text-black">
-                            <strong>Notar: </strong> que existe un componente por plantilla HTML pero un solo fichero ( JS ) por servicio
+                            <strong>Notar</strong> que existe un componente por plantilla HTML pero un solo fichero ( JS ) por servicio
                             <em>/assets/src/js/Employee/employee.js</em>
                         </div>
+                        <div class="notification is-dark is-light has-text-white">
+                            Para toda plantilla se requiere la <a href="/docs#navbar" target="_new">Barra de Navegación</a>,
+                            el header de importación de <a href="/docs#depends" target="_new">Dependencias</a>
+                            y la conexión entre el HTML y el componente de Alpine.js (<a href="/docs#component" target="_new">Iniciar Componente</a>).
+                            Este último paso debe repetirse en cada nueva plantilla HTML.
+                        </div>
+                        <pre><code>
+                            // Lista
+                            document.addEventListener('alpine:init', () => {
+                              Alpine.data("employeesListComponent", () => ({
+
+                                page: 1,
+                                pageSearch: 1,
+                                records: [],
+                                loading: false,
+                                hasNextPage: false,
+                                pattern: '',
+                                patternLast: '',
+                                isSearch: false,
+
+                                async init() { this.loadRecords() },
+
+                                async goHome() { await GoHome() },
+                                async goBack() { await GoBack("/home") },
+                                async logOut() { await LogOut() },
+                                async openRecord(id) { await ReadRecord(id, "/employee/record") },
+                                async newRecord() { await OnlyRedirect("/employee/new") },
+                                async goEmployee() { await OnlyRedirect("/employee") },
+
+                                currency() {
+                                  if (!this.records) { return }
+                                  for (const item of this.records) {
+                                    const money = FormatterMXN.format(item.dailyPayment)
+                                    item.dailyPayment = money
+                                  }
+                                },
+
+                                async clean() {
+                                  this.isSearch = false; this.pageSearch = 1; this.pattern = ''; this.page = 1; return await this.loadRecords()
+                                },
+
+                                async search() {
+                                  try {
+                                    this.loading = true
+                                    this.isSearch = true
+                                    if (this.patternLast !== '' && this.patternLast !== this.pattern) { this.pageSearch = 1};
+                                    const data = await FetchDataFromResponse(
+                                      `/employee/search?pattern=${this.pattern}&page=${this.pageSearch}`
+                                    )
+                                    this.patternLast = this.pattern; this.records = data.records; this.hasNextPage = data.hasNextPage;
+                                    this.currency();
+                                  } catch (error) {
+                                    throw error
+                                  } finally {
+                                    this.loading = false
+                                  }
+                                },
+
+                                async loadRecords() {
+                                  try {
+                                    this.loading = true
+                                    const data = await FetchDataFromResponse(
+                                      `/employee/slice?page=${this.page}`
+                                    )
+                                    this.records = data.records;
+                                    this.hasNextPage = data.hasNextPage;
+                                    this.currency();
+                                  } catch (error) {
+                                    throw error
+                                  } finally {
+                                    this.loading = false
+                                  }
+                                },
+
+                                block() {
+                                  if (!this.isSearch) { return (this.page === 1 || this.loading) };
+                                  if (this.isSearch) { return (this.pageSearch === 1 || this.loading) };
+                                },
+
+                                async previousPage() {
+                                  if (!this.isSearch) {
+                                    if (this.page > 1) {
+                                      this.page -= 1;
+                                      return await this.loadRecords()
+                                    };
+                                  }
+                                  if (this.pageSearch) {
+                                    if (this.pageSearch > 1) {
+                                      this.pageSearch -= 1;
+                                      return await this.search()
+                                    }
+                                  }
+                                },
+
+                                async nextPage() {
+                                  if (!this.isSearch) { if (this.hasNextPage) { this.page += 1; return await this.loadRecords() } }
+                                  if (this.isSearch) { if (this.hasNextPage) { this.pageSearch += 1; return await this.search() } }
+                                },
+
+                              }))
+                            })
+
+                            // Nuevo
+                            document.addEventListener('alpine:init', () => {
+                              Alpine.data("employeesNewComponent", () => ({
+
+                                authError: false,
+                                emailError: false,
+                                name: '',
+                                hireDate: '',
+                                dailyPayment: '',
+                                phone: '',
+                                email: '',
+                                nss: '',
+                                curp: '',
+                                loading: false,
+
+                                async goHome() { await GoHome() },
+                                async goBack() { await GoBack("/employee") },
+                                async logOut() { await LogOut() },
+                                async goEmployees() { await OnlyRedirect("/employee") },
+                                close() { this.authError = false; this.emailError = false },
+
+                                required() {
+                                  return (this.name === '' || this.hireDate === '' || this.dailyPayment === '' || this.loading)
+                                },
+
+                                currency(str) {
+                                  const float = ValidateFloatStringToFloat(str)
+                                  if (isNaN(float)) { return '' }
+                                  const money = FormatterMXN.format(float);
+                                  if (money === '$0.00') { return ''}
+                                  return money
+                                },
+
+                                integers(str) {
+                                  const integer = ValidateIntegerStringToInteger(str)
+                                  if (isNaN(integer)) { return '' }
+                                  return String(integer)
+                                },
+
+                                async createRecord() {
+                                  try {
+                                    this.loading = true
+                                    if (!ValidateEmail(this.email)) { this.emailError = true; return }
+                                    const payment = ValidateFloatStringToFloat(this.dailyPayment)
+                                    const number = ValidateIntegerStringToInteger(this.phone)
+                                    var values = JSON.stringify({
+                                      name: this.name,
+                                      hireDate: this.hireDate,
+                                      dailyPayment: payment,
+                                      phone: number,
+                                      email: this.email,
+                                      nss: this.nss,
+                                      curp: this.curp
+                                    })
+                                    const res = await CreateRecord("/employee/new", "/employee", { method: "POST", body: values })
+                                    this.authError = res.authError
+                                  } catch (error) {
+                                    throw error
+                                  } finally {
+                                    this.loading = false
+                                  }
+                                },
+
+                              }))
+                            })
+
+                            // "Record" comparte lo mismo que "Nuevo" excepto por la siguiente función.
+                            document.addEventListener('alpine:init', () => {
+                                Alpine.data("employeesRecordComponent", () => ({
+                                    async deleteRecord() {
+                                    try {
+                                        this.loading = true
+                                        const values = JSON.stringify({id: id})
+                                        const res = await DeleteRecord("/employee/record", "/employee", { method: "DELETE", body: values })
+                                        this.authError = res.authError
+                                    } catch (error) {
+                                        throw error
+                                    } finally {
+                                        this.loading = false
+                                    }
+                                    },
+                                }))
+                            })
+                        </code></pre>
                     </div>
                 </section>
-
             </div>
         </div>
     </div>
