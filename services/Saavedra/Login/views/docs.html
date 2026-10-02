@@ -35,20 +35,17 @@
         <!-- Titulo -->
         <div class="notification is-dark has-text-left mb-6">
             <div class="block has-text-white">
-                <div class="title is-3">
+                <div class="title is-1">
                     <p id="documentation">Documentación</p>
                 </div>
-                <div class="is-size-6">
-                    <p>
-                        A diferencia de frameworks complejos,
-                        Saavedra cuenta con poca documentación,
-                        basta con conocer algunas funciones reutilizables dentro del código base.
-                    </p>
-                    <p>
-                        Estas se dividen en dos partes principales: Backend ( Go ) y Frontend ( JS | HTML ).
-                        A continuación, se dará una breve explicación de cada componente.
-                    </p>
-                </div>
+                <p>
+                    A diferencia de frameworks complejos, Saavedra cuenta con poca documentación,
+                    basta con conocer algunas funciones reutilizables dentro del código base.
+                </p>
+                <p>
+                    Estas se dividen en dos partes principales: Backend ( Go ) y Frontend ( JS | HTML ).
+                    A continuación, se dará una breve explicación de cada componente.
+                </p>
             </div>
         </div>
         <div class="columns">
@@ -165,20 +162,16 @@
                     <div class="block" id="add-permissions">
                         <p class="subtitle is-5">Función ( AddPermissions )</p>
                         <div class="content is-size-6">
-                            <p>
+                            <div class="notification is-info is-light has-text-black">
                                 Agregar permisos a las peticiones ( GET, POST, PUT, DELETE, etc... )
                                 Basta con agregar la función al inicio del endpoint para validar la petición del usuario.
-                            </p>
-                            <blockquote>
-                                AddPermissions( level <em>int</em>, userParty <em>string</em>) (<em>bool, error</em>)
-                            </blockquote>
-                            <p class="has-text-link">
-                                <em>
-                                    Si nivel de protección 0 se asume nivel mas alto 4 ( solo admin ).
-                                    Retornar <strong>http.StatusUnauthorized</strong> permite que JS
-                                    notifique al usuario.
-                                </em>
-                            </p>
+                            </div>
+                            <blockquote>AddPermissions( level <em>int</em>, userParty <em>string</em>) (<em>bool, error</em>)</blockquote>
+                            <div class="notification is-warning is-light has-text-black">
+                                Cuando el nivel de protección es 0 se asume nivel mas alto 4 ( solo admin ).
+                                Retornar <strong style="color: tomato;">http.StatusUnauthorized</strong> permite que JS
+                                notifique al usuario.
+                            </div>
                         </div>
                         <pre><code>
                             ...
@@ -359,16 +352,12 @@
                     <div class="block" id="nav-js">
                         <p class="subtitle is-5">Navegación ( GoHome, GoBack, logOut, OnlyRedirect )</p>
                         <div class="content is-size-6">
-                            <p>
-                                Sección de 4 reutilizables JavaScript que permiten redirrección y navegación.
-                            </p>
-                            <p>
-                                <em class="has-text-link">
-                                    El uso es extremadamente simple; el componente Alpine lo incia en el HTML,
-                                    los mapeas con minuscula, y llamas a la funcion en mayusculas.
-                                    Estas funionen ya se encargan de la seguridad y sesión de usuario.
-                                </em>
-                            </p>
+                            <p><strong>Sección de 4 reutilizables JavaScript que permiten redirrección y navegación.</strong></p>
+                            <div class="notification is-info is-light has-text-black">
+                                El uso es extremadamente simple; el componente Alpine lo incias en el HTML,
+                                los mapeas con minuscula, y llamas a la funcion en mayusculas.
+                                Estas funciones ya se encargan de la seguridad y sesión de usuario.
+                            </div>
                             <blockquote>GoHome( ) | Redirecciona a "/home"</blockquote>
                             <blockquote>GoBack( path <em>string</em> ) | Redirecciona a "path"</blockquote>
                             <blockquote>LogOut( ) | Redirecciona a "/"</blockquote>
@@ -393,21 +382,20 @@
                         <p class="subtitle is-5">
                             CRUD ( ReadRecord, CreateRecord, UpdateRecord, DeleteRecord, FetchDataFromResponse )
                         </p>
-                        <p>
-                            Todas las funciones <strong>CRUD</strong> devuelven un <em>object</em> con el atributo
+                        <div class="notification is-info is-light has-text-black">
+                            Todas las funciones <strong>CRUD</strong> devuelven un <strong>object</strong> con el atributo
                             <strong>authError</strong> <em>bool</em>.
-                            Trabaja en conjunto con <a href="#add-permissions">AddPermissions</a>.
-                        </p>
-                        <p>
-                            Si el servicio es asegurado a nivel 4 para todos los endpoints GET
-                            <em>( /home, /list, /new, /record, /cualquier otra... )</em>
-                            entonces no es necesario guardar la respuesta <em>const res = await CRUD </em> y se puede
-                            llamar a las funciones con la siguiente sintaxis.
-                        </p>
+                            Trabaja en conjunto con <a href="#add-permissions"><strong>AddPermissions</strong></a>.
+                            Si el servicio es asegurado a nivel 4 para todos los endpoints
+                            GET<em>( /home, /list, /new, /record, /cualquier otra... )</em>
+                            ( Solo Admin ). No necesitas esperar respuesta en los controladores Alpine.js.
+                            <strong>Si acaso unicamente en la vista menu de la ruta "/home".</strong>
+                        </div>
                         <pre><code>
                             // Cuando todo el servicio es nivel 4.
                             async createRecord() {
                             const record = { }
+                            // Notar que no se espera respuesta y se utiliza un "await" directo
                             await CreateRecord(path, redirect, {method: "POST", body: JSON.stringify(record)})
                             },
 
@@ -436,15 +424,13 @@
                             <blockquote>DeleteRecord( path <em>string</em>, redirect <em>string</em> options <em>object</em> ) <em>object</em> - Eliminar un registro.</blockquote>
                             <blockquote>FetchDataFromResponse( path <em>string</em> options <em>object</em> ) <em>object</em> - Solicitar data a un endpoint.</blockquote>
                         </div>
-                        <p>
+                        <div class="notification is-warning is-light has-text-black">
                             Si se desea manejar niveles de acuero al permiso de usuario, debe esperarse el objeto
                             con la validación de autorización.
-                        </p>
-                        <p class="has-text-danger">
                             Notar que la funcion <strong>FetchDataFromResponse</strong>
-                            no devuelve el objeto <em>( object.authError )</em>, en su lugar
+                            NO devuelve el objeto <em>( object.authError )</em>, en su lugar
                             devuelve un objeto de <strong>data</strong> desde el backend.
-                        </p>
+                        </div>
                         <pre><code>
                             // Manejando solicitudes segun niveles de permisos.
                             async createRecord() {
