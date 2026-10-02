@@ -176,7 +176,7 @@ func (e EndpointHandler) CallEmployeesRecord(w http.ResponseWriter, r *http.Requ
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-		var body types.Body
+		var body types.OnlyId
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			log.Printf("Error '/employee/record' (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -227,7 +227,7 @@ func (e EndpointHandler) CallEmployeesRecord(w http.ResponseWriter, r *http.Requ
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-		var body types.Body
+		var body types.OnlyId
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			log.Printf("Error '/employee/record' (%v)", err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
