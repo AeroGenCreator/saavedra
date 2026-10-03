@@ -17,6 +17,8 @@
 
 Saavedra es una caja de herramientas unida a través de un contrato de flujos.
 
+`Una arquitectura pensada para el código explicito`.
+
 - Saavedra fue pensado para el desarrollo de servicios empresariales; asimismo, se tomó inspiración de los módulos de los ERPs modernos.
 
 Sin embargo, cada servicio se construye desde cero, lo cual facilita la personalización por cliente.
