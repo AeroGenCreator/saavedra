@@ -84,6 +84,10 @@
                                 <a href="#numbers"><li>( Int Float ) Currency</li></a>
                                 <a href="#email-validate"><li>Emails</li></a>
                             </ul>
+                            <a href="#extras"><li>Extras</li></a>
+                            <ul>
+                                <a href="#many2one"><li>Many2One ( Selection )</li></a>
+                            </ul>
                         </ul>
                         <div class="buttons">
                             <button
@@ -487,6 +491,53 @@
                         </div>
                         <pre><code>
                             if (!ValidateEmail(this.email)) { this.emailError = true; return }
+                        </code></pre>
+                    </div>
+
+                    <hr>
+
+                    <div class="subtitle is-3" id="extras">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fa-solid fa-fire"></i></span><span id="frontend-js">Extras</span>
+                        </span>
+                    </div>
+                    <div class="block" id="many2one">
+                        <p class="subtitle is-5">Many2One ( Selection )</p>
+                        <div class="notification is-primary is-light hast-text-dark">
+                            ( GO ) procesa la data desde <strong>service</strong> el cual sube
+                            a la capa de <strong>endpoints</strong>. Desde ahi el ( JS ) puede llamar a la data.
+                        </div>
+                        <div class="notification is-warning is-light hast-text-dark">
+                            En ocasiones la data de relación podras obtenerla desde la base de datos,
+                            en otras ocaciones se extra la data desde un JSON o cualquier otro medio.
+                            Para este ejemplo pretendemos que se extra data desde JSON.
+                        </div>
+                        <div class="notification is-dark is-light hast-text-white"><strong>
+                            Supongamos que tenemos el JSON [ { "code": 1 }, { "code": 2 }, ... ]
+                        </strong></div>
+                        <pre><code>
+                            // 1. TIPADO
+                            type Indentifiers struct {
+                                Code int `json:"code"`
+                            }
+                            // Notar que un solo 'Many2One' puedes mandar mas slices de selección.
+                            type Many2One struct {
+                                IdentifiersRecord: []*Identifiers `json:"identifiersRecords"`
+                            }
+                            // 2. LEER Y DECODIFICAR
+                            file, err := os.Open(path)
+                           	if err != nil {
+                          		return nil, err
+                           	}
+                            defer file.Close()
+                           	var many2one Many2One
+                           	if err := json.NewDecoder(file).Decode(&many2one.IdentifiersRecords); err != nil {
+                          		return nil, err
+                           	}
+                            // 3. RETORNAR EN ENDPOINT
+                            w.Header().Set("Content-Type", "application/json")
+                      		w.WriteHeader(http.StatusOK)
+                      		json.NewEncoder(w).Encode(many2one)
                         </code></pre>
                     </div>
                 </div>
