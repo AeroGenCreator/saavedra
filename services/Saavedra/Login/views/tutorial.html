@@ -40,7 +40,7 @@
                 Asimismo, detalla la distribución de capas y la jerarquía de directorios dentro de la arquitectura.
             </p>
             <p>
-                Para familiarisarse con ( GO ) y la arquitectura del ( Repository Pattern ) recomiendo el tutorial de
+                Para familiarisarse con ( GO ) y la arquitectura del ( Repository Pattern ) se recomienda el tutorial de
                 <a href="https://www.youtube.com/watch?v=ID9NZ88JeOE&t=3387s" target="_blank" class="has-text-info">
                     <span class="icon-text">
                         <span class="icon"><i class="fa-brands fa-youtube"></i></span>
@@ -111,6 +111,8 @@
         </div>
         <div class="column is-four-fifths">
             <div class="box">
+
+                <!-- TUTORIAL DIRECTORIOS -->
                 <section id="jerarquia-tutorial" class="section">
                     <div class="subtitle is-3">
                         <span class="icon-text">
@@ -118,11 +120,11 @@
                             <span id="backend">Proyecto</span>
                         </span>
                     </div>
-                    <div class="notification is-danger is-light has-text-black">
+                    <div class="notification is-danger is-light has-text-dark">
                         Este tutorial aborda la construcción del servicio Empleados.
                         Como ya existe en la base de Saavedra, es necesario eliminarlo antes de comenzar.
                     </div>
-                    <div class="notification is-warning is-light has-text-black">
+                    <div class="notification is-warning is-light has-text-dark">
                         Asegúrate de borrar el directorio <em>/services/Employee</em>,
                         su directorio controlador <em>/assets/src/js/Employee</em>,
                         el bloque de menú en <em>/services/Saavedra/Home/views/home.html</em>
@@ -131,7 +133,7 @@
                     </div>
                     <div class="block" id="rutas">
                         <p class="subtitle is-5">Rutas</p>
-                        <div class="notification is-info is-light has-text-black"><ul>
+                        <div class="notification is-info is-light has-text-dark"><ul>
                             <li><strong>Directorio assets: </strong>
                                 Es servido por Saavedra y habilita la importación de componentes JavaScript.</li>
                             <li><strong>Nuevos servicios: </strong>
@@ -167,7 +169,7 @@
                     </div>
                     <div class="block" id="service">
                         <p class="subtitle is-5">Servicio</p>
-                        <div class="notification is-info is-light has-text-black">
+                        <div class="notification is-info is-light has-text-dark">
                             A diferencia de un módulo, un servicio está diseñado para resolver una tarea de negocio muy concreta,
                             reduciéndola a su mínima expresión. A continuación, se detalla la estructura jerárquica de un servicio:
                         </div>
@@ -205,11 +207,12 @@
                                 <li>Router ( Rutas ) -> ( HTML - JS )</li>
                             </ol>
                         </blockquote></div>
-                        <div class="notification is-warning is-light has-text-black">
+                        <div class="notification is-warning is-light has-text-dark">
                             El directorio <strong>config</strong> permite guardar data de configuración o volatil ( JSON, toml, yml )
                         </div>
                     </div>
                 </section>
+                <hr>
 
                 <!-- TUTORIAL BACKEND -->
                 <section id="backend-tutorial" class="section">
@@ -221,7 +224,7 @@
                     </div>
                     <div class="block" id="tables">
                         <p class="subtitle is-5">Tablas</p>
-                        <div class="notification is-info is-light has-text-black">
+                        <div class="notification is-info is-light has-text-dark">
                             La construcción de tablas se realizan siguiendo una contrucción logica de respaldo.
                             A continuación se muestra como se inicia además se recomienda mantener el mismo nombre
                             para la función de creación. ( CreateSchema )
@@ -292,7 +295,7 @@
                     </div>
                     <div class="block" id="types">
                         <p class="subtitle is-5">Tipado</p>
-                        <div class="notification is-info is-light has-text-black">
+                        <div class="notification is-info is-light has-text-dark">
                             ( GO ) - Tipamos las estructuras que utilizara el servicio. Para un CRUD basta con
                             construir estructura para <strong>Registro</strong>,
                             <strong>Slice de Registros</strong> e <strong>Id</strong>
@@ -326,7 +329,7 @@
                     </div>
                     <div class="block" id="store">
                         <p class="subtitle is-5">CRUD</p><p>Capa de persitencia de datos.</p>
-                        <div class="notification is-info is-light has-text-black">
+                        <div class="notification is-info is-light has-text-dark">
                             QUERIES - Slice de datos, filtros, más CRUD.
                         </div>
                         <div class="content is-size-6"><blockquote><em>/services/Employee/store/store.go</em></blockquote></div>
@@ -860,7 +863,7 @@
                             ( <a href="/docs#auth-middle-ware" target="_blank">AuthMiddleWare</a> ).
                         </p>
                         <div class="content is-size-6"><blockquote><em>/services/Employee/router/router.go</em></blockquote></div>
-                        <div class="notification is-danger is-light has-text-black">
+                        <div class="notification is-danger is-light has-text-dark">
                             Notar como en <strong>router</strong> hacemos uso de todas las capas inferiores.
                         </div>
                         <pre><code>
@@ -890,7 +893,7 @@
                     <div class="block" id="register">
                         <p class="subtitle is-5">Registro</p>
                         <p>Por último se registran las tablas y las rutas del servicio.</p>
-                        <div class="notification is-danger is-light has-text-black">
+                        <div class="notification is-danger is-light has-text-dark">
                             El registro se debe realizar en el fichero <strong>main.go</strong>.
                             Las importaciones se deben hacer con alias. Notar la inyección de dependencias para
                             ( <strong>db *sql.DB</strong> ) y ( <strong>mux *http.ServeMux</strong> ).
@@ -907,6 +910,7 @@
                         </code></pre>
                     </div>
                 </section>
+                <hr>
 
                 <!-- TUTORIAL FRONTEND -->
                 <section id="frontend-tutorial" class="section">
@@ -947,8 +951,8 @@
                     </div>
                     <div class="block" id="list-view">
                         <p class="subtitle is-5">Vista Lista</p>
-                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
-                        <div class="notification is-danger is-light has-text-black">
+                        <div class="notification is-primary is-light has-text-dark">Plantilla ( HTML )</div>
+                        <div class="notification is-danger is-light has-text-dark">
                             Todas las plantillas omiten los campos ( <strong>Columnas</strong> ).
                             Por tanto es importante agregarlos segun el tipo de dato en las vistas <strong>Nuevo & Record</strong>.
                             Mientras que en la vista <strong>Lista</strong> basta con registrarlos en <strong>&lttd&gt&lttd&gt</strong>.
@@ -1028,7 +1032,7 @@
                     </div>
                     <div class="block" id="new-view">
                         <p class="subtitle is-5">Vista Nuevo</p>
-                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
+                        <div class="notification is-primary is-light has-text-dark">Plantilla ( HTML )</div>
                         <pre><code>
                             &lt;main class="hero"&gt
                             &lt;section class="container"&gt
@@ -1114,8 +1118,8 @@
                     </div>
                     <div class="block" id="record-view">
                         <p class="subtitle is-5">Vista Record</p>
-                        <div class="notification is-primary is-light has-text-black">Plantilla ( HTML )</div>
-                        <div class="notification is-info is-light has-text-black">
+                        <div class="notification is-primary is-light has-text-dark">Plantilla ( HTML )</div>
+                        <div class="notification is-info is-light has-text-dark">
                             Tanto la plantilla <strong><a href="/tutorial#new-view">Nuevo</a>
                             & Record</strong> comparten la misma base.
                             La unica diferencia sera que se agregara un nuevo boton en la cinta de acciones.
@@ -1137,11 +1141,11 @@
                     </div>
                     <div class="block" id="component">
                         <p class="subtitle is-5">Componentes ( Alpine.js )</p>
-                        <div class="notification is-warning is-light has-text-black">
+                        <div class="notification is-warning is-light has-text-dark">
                             Notar que existe un componente por plantilla HTML pero solo un fichero ( JS ) por servicio.
                         </div>
                         <div class="content"><blockquote><em>/assets/src/js/Employee/employee.js</em></blockquote></div>
-                        <div class="notification is-danger is-light has-text-black">
+                        <div class="notification is-danger is-light has-text-dark">
                             La plantilla de código a continuación no contiene las rutas del tutorial escritas.
                             Deberas agregarlas manualmente segun como las hayas registrado en
                             <a href="/tutorial#router"><strong>Router</strong></a>.
