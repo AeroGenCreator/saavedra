@@ -279,15 +279,13 @@
                         <pre><code>
                             &ltdiv class="column is-3"&gt
                                 &lt!-- Manejar Acciones Con Alpine --&gt
-                                &lta @click=""&gt
-                                    &ltdiv class="notification is-primary clickable menuitem focus"&gt
-                                        &ltspan class="icon-text"&gt
-                                            &ltspan class="icon"&gt&lti class="fa-solid fa-users"&gt&lt/i&gt&lt/span&gt
-                                            &ltspan&gt&lth2 class="subtitle"&gt ... &lt/h2&gt&lt/span&gt
-                                        &lt/span&gt
-                                        &ltp class="is-size-7"&gt ... &lt/p&gt
-                                    &lt/div&gt
-                                &lt/a&gt
+                                &ltdiv class="notification is-primary clickable menuitem focus" @click=""&gt
+                                    &ltspan class="icon-text"&gt
+                                        &ltspan class="icon"&gt&lt!-- ICON --&gt&lt/span&gt
+                                        &ltspan&gt&lth2 class="subtitle"&gt ... &lt/h2&gt&lt/span&gt
+                                    &lt/span&gt
+                                    &ltp class="is-size-7"&gt ... &lt/p&gt
+                                &lt/div&gt
                             &lt/div&gt
                         </code></pre>
                     </div>
