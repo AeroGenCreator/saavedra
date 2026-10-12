@@ -1,6 +1,22 @@
 // Variables temporales
 let refreshSubscribers = [];
+
 let isRefreshing = false;
+
+const MonthsObject = {
+  "1": "Enero",
+  "2": "Febrero",
+  "3": "Marzo",
+  "4": "Abril",
+  "5": "Mayo",
+  "6": "Junio",
+  "7": "Julio",
+  "8": "Agosto",
+  "9": "Septiembre",
+  "10": "Octubre",
+  "11": "Nomviembre",
+  "12": "Diciembre",
+};
 
 // === CONSTANTES GLOBALES ===
 
@@ -14,25 +30,31 @@ const FormatterMXN = new Intl.NumberFormat('es-MX', {
 function ValidateEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
-}
+};
 
 function ValidateFloatStringToFloat(str) {
   if (!str) return 0.0;
   const regex = /[^0-9.-]+/g;
   return parseFloat(str.replace(regex, ""))
-}
+};
 
 function ValidateIntegerStringToInteger(str) {
   if (!str) return 0;
   const float = ValidateFloatStringToFloat(str)
   return Math.trunc(float)
-}
+};
 
 function onTokenRefreshed() {
-  // Si existen peticiones en cola, se ejecutn
+  // Si existen peticiones en cola, se ejecuta
   refreshSubscribers.forEach((callback) => callback());
   refreshSubscribers = [];
-}
+};
+
+function MonthsFromIntegerToString(month) {
+  try {
+    const stringMonth = MonthsObject[String(month)]; return stringMonth;
+  } catch (error) { throw error }
+};
 
 // Función que solicita refrescar token.
 async function SecureFetching(route, requestContent = {}, customHeaders = {'X-Requested-With': 'jsFrontendComponent'}) {
