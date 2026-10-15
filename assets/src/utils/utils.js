@@ -40,7 +40,7 @@ function ValidateFloatStringToFloat(str) {
 
 function ValidateIntegerStringToInteger(str) {
   if (!str) { return 0 }; var upIndx = 0;
-  [...str].forEach(char => { if(char === "0") { upIndx++ } else { return } })
+  for (const char of str) { if (char === "0") { upIndx++ } else { break; } }
   const shortStr = str.slice(upIndx)
   const float = ValidateFloatStringToFloat(shortStr)
   return Math.trunc(float)
